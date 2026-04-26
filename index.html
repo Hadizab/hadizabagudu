@@ -1,1686 +1,2323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elena Whitmore | Author</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --white: #ffffff;
-            --off-white: #fafafa;
-            --light-grey: #f5f5f5;
-            --medium-grey: #888888;
-            --dark-grey: #333333;
-            --black: #1a1a1a;
-            --accent-blue: #2563eb;
-            --accent-light: #eff6ff;
-            --border-grey: #e5e5e5;
-            --success: #10b981;
-            --error: #ef4444;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--white);
-            color: var(--dark-grey);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1.5rem 5%;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
-
-        nav.scrolled {
-            border-bottom: 1px solid var(--light-grey);
-            padding: 1rem 5%;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--black);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--medium-grey);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-blue);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--black);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 2px;
-            background: var(--black);
-            transition: all 0.3s ease;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 5% 5rem;
-            background: linear-gradient(to bottom, var(--white) 0%, var(--off-white) 100%);
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-content {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 1s ease forwards;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-subtitle {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--medium-grey);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 4rem;
-            font-weight: 400;
-            line-height: 1.1;
-            color: var(--black);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-title span {
-            font-style: italic;
-            color: var(--accent-blue);
-        }
-
-        .hero-description {
-            font-size: 1.125rem;
-            color: var(--medium-grey);
-            margin-bottom: 2rem;
-            max-width: 500px;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-            cursor: pointer;
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--black);
-            color: var(--white);
-            border: 2px solid var(--black);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--black);
-            border: 2px solid var(--light-grey);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--black);
-            background: var(--light-grey);
-        }
-
-        .btn-text {
-            background: none;
-            color: var(--accent-blue);
-            padding: 0.5rem 0;
-            border-bottom: 1px solid transparent;
-            border-radius: 0;
-        }
-
-        .btn-text:hover {
-            border-bottom-color: var(--accent-blue);
-            transform: none;
-            box-shadow: none;
-        }
-
-        .hero-image {
-            position: relative;
-            opacity: 0;
-            transform: translateX(30px);
-            animation: fadeLeft 1s ease 0.3s forwards;
-        }
-
-        @keyframes fadeLeft {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 600px;
-            object-fit: cover;
-            filter: grayscale(20%);
-            transition: filter 0.5s ease;
-        }
-
-        .hero-image:hover img {
-            filter: grayscale(0%);
-        }
-
-        .image-frame {
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: 20px;
-            bottom: 20px;
-            border: 1px solid var(--light-grey);
-            z-index: -1;
-            transition: all 0.5s ease;
-        }
-
-        .hero-image:hover .image-frame {
-            top: -30px;
-            left: -30px;
-            right: 30px;
-            bottom: 30px;
-            border-color: var(--accent-blue);
-        }
-
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-blue);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 400;
-            color: var(--black);
-        }
-
-        /* Gallery Section - Image Slider */
-        .gallery {
-            padding: 6rem 5%;
-            background: var(--off-white);
-        }
-
-        .gallery-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .slider-wrapper {
-            position: relative;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .slider-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            background: var(--white);
-        }
-
-        .slider-container img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease;
-            transform: scale(1.05);
-        }
-
-        .slider-container img.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .slider-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .slider-controls button {
-            background: var(--white);
-            border: 2px solid var(--border-grey);
-            color: var(--dark-grey);
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slider-controls button:hover {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-            color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
-        }
-
-        .slider-dots {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--border-grey);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: var(--accent-blue);
-            transform: scale(1.2);
-        }
-
-        .dot:hover {
-            background: var(--medium-grey);
-        }
-
-        .slide-counter {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            color: var(--medium-grey);
-            letter-spacing: 2px;
-        }
-
-        /* Books Section */
-        .books {
-            padding: 6rem 5%;
-            background: var(--white);
-        }
-
-        .books-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .book-card {
-            background: var(--off-white);
-            padding: 1.5rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .book-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent-blue);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-        }
-
-        .book-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .book-cover {
-            width: 100%;
-            height: 350px;
-            background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem;
-            color: var(--medium-grey);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border-grey);
-        }
-
-        .book-cover::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 100%);
-        }
-
-        .book-year {
-            font-size: 0.75rem;
-            color: var(--accent-blue);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .book-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            color: var(--black);
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
-        }
-
-        .book-genre {
-            font-size: 0.875rem;
-            color: var(--medium-grey);
-            margin-bottom: 1rem;
-        }
-
-        .book-description {
-            font-size: 0.9rem;
-            color: var(--dark-grey);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .book-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .read-link {
-            font-size: 0.85rem;
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            transition: gap 0.3s ease;
-        }
-
-        .read-link:hover {
-            gap: 0.5rem;
-        }
-
-        .read-link::after {
-            content: '→';
-            transition: transform 0.3s ease;
-        }
-
-        .read-link:hover::after {
-            transform: translateX(3px);
-        }
-
-        .expand-btn {
-            grid-column: 1 / -1;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .hidden-books {
-            display: none;
-            grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            margin-top: 2rem;
-        }
-
-        .hidden-books.show {
-            display: grid;
-        }
-
-        /* Blog Section */
-        .blog {
-            padding: 6rem 5%;
-            background: var(--off-white);
-        }
-
-        .blog-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .blog-card {
-            background: var(--white);
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-grey);
-            cursor: pointer;
-        }
-
-        .blog-card:hover {
-            transform: translateX(10px);
-            border-left: 4px solid var(--accent-blue);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .blog-meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.8rem;
-            color: var(--medium-grey);
-        }
-
-        .blog-category {
-            color: var(--accent-blue);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .blog-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
-            color: var(--black);
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-
-        .blog-excerpt {
-            color: var(--medium-grey);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .read-more {
-            color: var(--black);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s ease;
-        }
-
-        .read-more:hover {
-            gap: 0.75rem;
-            color: var(--accent-blue);
-        }
-
-        /* About Section */
-        .about {
-            padding: 6rem 5%;
-            background: var(--white);
-        }
-
-        .about-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .about-image {
-            position: sticky;
-            top: 100px;
-        }
-
-        .about-image img {
-            width: 100%;
-            filter: grayscale(30%);
-            transition: filter 0.5s ease;
-        }
-
-        .about-image:hover img {
-            filter: grayscale(0%);
-        }
-
-        .about-content h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: var(--black);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        .about-intro {
-            color: var(--dark-grey);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .about-content p {
-            color: var(--medium-grey);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-
-        .expandable-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .expandable-content.expanded {
-            max-height: 2000px;
-            opacity: 1;
-        }
-
-        .expand-btn-bio {
-            background: none;
-            border: none;
-            color: var(--accent-blue);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            padding: 0;
-        }
-
-        .expand-btn-bio:hover {
-            text-decoration: underline;
-        }
-
-        .expand-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .expand-btn-bio[aria-expanded="true"] .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .bio-section {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-grey);
-        }
-
-        .bio-section h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem;
-            color: var(--black);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .bio-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .bio-list li {
-            padding: 0.5rem 0;
-            color: var(--medium-grey);
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .bio-list li::before {
-            content: '—';
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--light-grey);
-        }
-
-        .stat-item h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            color: var(--black);
-            font-weight: 400;
-        }
-
-        .stat-item p {
-            font-size: 0.875rem;
-            color: var(--medium-grey);
-            margin: 0;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 6rem 5%;
-            background: var(--off-white);
-        }
-
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-form {
-            margin-top: 3rem;
-            text-align: left;
-            background: var(--white);
-            padding: 3rem;
-            border: 1px solid var(--border-grey);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.875rem;
-            color: var(--medium-grey);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid var(--border-grey);
-            background: var(--white);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: var(--dark-grey);
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px var(--accent-light);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .submit-btn {
-            background: var(--black);
-            color: var(--white);
-            border: none;
-            padding: 1rem 3rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            position: relative;
-        }
-
-        .submit-btn:hover:not(:disabled) {
-            background: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .form-status {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        .form-status.success {
-            display: block;
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-
-        .form-status.error {
-            display: block;
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--black);
-            color: var(--white);
-            padding: 3rem 5%;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            color: var(--medium-grey);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .social-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent-blue);
-            transition: width 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--white);
-        }
-
-        .social-links a:hover::after {
-            width: 100%;
-        }
-
-        .copyright {
-            font-size: 0.875rem;
-            color: var(--medium-grey);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-image {
-                order: -1;
-            }
-
-            .hero-image img {
-                height: 400px;
-            }
-
-            .cta-buttons {
-                justify-content: center;
-            }
-
-            .slider-container {
-                height: 300px;
-            }
-
-            .about-container {
-                grid-template-columns: 1fr;
-            }
-
-            .about-image {
-                position: relative;
-                top: 0;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .books-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .blog-card {
-                padding: 1.5rem;
-            }
-
-            .contact-form {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Utility */
-        .text-center {
-            text-align: center;
-        }
-
-        .mt-2 {
-            margin-top: 2rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Hadiza Bagudu | Author • Poet • Storyteller</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Garamond', 'Times New Roman', serif;
+      background: #FFFFFF;
+      color: #1C1C1C;
+      line-height: 1.55;
+      scroll-behavior: smooth;
+    }
+
+    /* refined classy borders – sharp but with subtle elegance */
+    img, button, a, .container, section, .card, .book-card, .poem-card, .recipe-card, 
+    .event-img, .gallery-img, .author-image, input, textarea, .nav-container, 
+    .poetry-hero, .poetry-bg-side, .testimonial, .highlight, .btn, .coffee-btn {
+      border-radius: 0px !important;
+    }
+
+    /* typography — graceful serif for headings, crisp sans for body */
+    h1, h2, h3, h4, .logo, .poem-item a, .hero-strip h1 {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    h1 { font-size: 3.8rem; margin-bottom: 0.75rem; line-height: 1.2; font-weight: 500; }
+    h2 { font-size: 2rem; margin-bottom: 1.8rem; font-weight: 500; letter-spacing: -0.3px; border-bottom: 1px solid #E2DCD5; padding-bottom: 0.5rem; display: inline-block; }
+    h3 { font-size: 1.5rem; margin-bottom: 0.75rem; font-weight: 500; letter-spacing: -0.2px; }
+    p { margin-bottom: 1.1rem; color: #2B2B2B; font-weight: 400; font-size: 1rem; line-height: 1.6; }
+
+    a {
+      text-decoration: none;
+      color: #2C2C2C;
+      font-weight: 450;
+      transition: all 0.25s ease;
+      border-bottom: 1px solid transparent;
+    }
+    a:hover { color: #8A6F4C; border-bottom-color: #DCCFBF; opacity: 1; }
+
+    /* layout */
+    .wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* navigation — refined dark bar, subtle gold accent */
+    nav {
+      padding: 1.2rem 2rem;
+      background: #1C1C1C;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #3A3A3A;
+    }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #F5EAD8;
+      background: none;
+      border: none;
+      font-family: 'Playfair Display', serif;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-weight: 450;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #E8E0D5;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 4px;
+      font-family: 'Inter', sans-serif;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #C8AA7E;
+      color: #F3E9DE;
+    }
+
+    /* page transitions */
+    .page {
+      display: none;
+      padding: 3rem 0 4rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .active-page {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* buttons — understated, elegant */
+    .btn, .coffee-btn, .join-wa-btn {
+      display: inline-block;
+      background: transparent;
+      color: #1C1C1C;
+      padding: 0.7rem 1.8rem;
+      font-weight: 500;
+      border: 1px solid #B9A788;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.25s;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+      background: #FFFFFF;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #2C2C2C;
+    }
+    .btn-outline:hover {
+      background: #F9F5EF;
+      border-color: #8A6F4C;
+      color: #8A6F4C;
+    }
+    .btn:hover, .coffee-btn:hover, .join-wa-btn:hover {
+      background: #F5EFE7;
+      border-color: #A0845C;
+      color: #5E4B34;
+    }
+
+    /* decorative floral divider (subtle) */
+    .floral-divider {
+      text-align: center;
+      margin: 2rem 0 1.5rem;
+      font-size: 1rem;
+      letter-spacing: 6px;
+      color: #DCCFBF;
+      font-weight: 300;
+    }
+
+    /* grid layouts */
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 2rem;
+      margin-top: 1.8rem;
+    }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* book cards — airy & classic */
+    .book-card {
+      background: white;
+      border: 1px solid #E9E2D9;
+      padding: 1.2rem;
+      text-align: center;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .book-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+      border-color: #D1C0AA;
+    }
+    .book-card img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      border: none;
+      margin-bottom: 0.9rem;
+      filter: grayscale(8%);
+    }
+    .book-card p { margin: 0.4rem 0; font-weight: 500; font-size: 0.95rem; }
+
+    /* testimonial — quiet refinement */
+    .testimonial {
+      border-left: 3px solid #C7B59B;
+      background: #FCFAF7;
+      padding: 1.4rem 1.8rem;
+      margin: 1.8rem 0;
+      font-style: normal;
+      font-size: 0.95rem;
+    }
+
+    /* recipe cards */
+    .recipe-card {
+      border: 1px solid #E3D9CF;
+      padding: 1rem;
+      background: white;
+      transition: all 0.2s;
+    }
+    .recipe-card img, .recipe-card video {
+      width: 100%;
+      border: none;
+      margin-bottom: 0.75rem;
+    }
+
+    /* poetry page — sophisticated duo tone with soft flower overlay */
+    .poetry-hero {
+      display: flex;
+      min-height: 68vh;
+      background: white;
+      flex-wrap: wrap;
+      border: 1px solid #EBE3DA;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+    }
+    .poetry-bg-side {
+      flex: 1.2;
+      background-image: url('https://i.pinimg.com/736x/31/d1/22/31d122c249c3cf6cfa9bd8c47f657c2d.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      min-height: 480px;
+      border-right: none;
+      position: relative;
+    }
+    .poetry-bg-side::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,245,0.1) 0%, rgba(0,0,0,0.05) 100%);
+      pointer-events: none;
+    }
+    .poetry-list-side {
+      flex: 1;
+      background: #FEFCF9;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .poetry-list-side h2 {
+      border-bottom: none;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0px;
+    }
+    .poem-item {
+      margin-bottom: 2rem;
+      border-bottom: 1px dotted #E0D5C8;
+      padding-bottom: 1rem;
+    }
+    .poem-item a {
+      font-size: 1.7rem;
+      font-weight: 450;
+      font-family: 'Playfair Display', serif;
+      color: #3C2E22;
+      border-bottom: none;
+    }
+    .poem-item a:hover { color: #A6835C; border-bottom: none; }
+    .poem-note {
+      font-size: 0.85rem;
+      color: #7A6852;
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+
+    /* gallery grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px,1fr));
+      gap: 1.5rem;
+      margin: 1.8rem 0;
+    }
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border: 1px solid #EDE5DB;
+      transition: filter 0.2s;
+    }
+    .gallery-grid img:hover {
+      filter: brightness(97%);
+    }
+
+    /* faq */
+    .faq-item {
+      border-top: 1px solid #E3D9CF;
+      padding: 1rem 0;
+    }
+    .faq-question {
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      background: transparent;
+      padding: 0.6rem 0;
+      font-family: 'Inter', sans-serif;
+    }
+    .faq-answer {
+      display: none;
+      margin-top: 0.3rem;
+      padding: 0.5rem 0 1rem;
+      background: transparent;
+      border-left: 2px solid #CBB99E;
+      padding-left: 1rem;
+      color: #4F4438;
+    }
+    .faq-answer.show {
+      display: block;
+    }
+
+    /* hero strip */
+    .hero-strip {
+      background: #FCF9F5;
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #EFE6DD;
+    }
+    .hero-strip h1 {
+      color: #1E1915;
+    }
+    .hero-strip p {
+      color: #4A3E32;
+    }
+
+     /* Footer Styles */
+    footer {
+      background: #1C1C1C;
+      color: #E8E0D5;
+      padding: 3rem 2rem 1rem;
+      margin-top: 4rem;
+    }
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-section h3 {
+      color: #F5EAD8;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #3A3A3A;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+    .footer-section a {
+      color: #C8AA7E;
+    }
+    .footer-section a:hover {
+      color: #F5EAD8;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid #3A3A3A;
+      font-size: 0.8rem;
+      color: #A89A82;
+    }
+
+
+    /* floral accent — subtle */
+    .floral-icon {
+      font-size: 1.2rem;
+      color: #D4C0A8;
+      margin: 0 0.2rem;
+    }
+
+    .feature-book {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+      background: #FDFAF6;
+      padding: 2rem;
+      border: 1px solid #EADFCB;
+    }
+
+    .highlight {
+      background: #FEFCF9;
+      padding: 1.8rem;
+      border-left: 3px solid #CDBA9F;
+      margin: 1.5rem 0;
+    }
+
+    .social-links a {
+      margin-right: 1rem;
+      font-weight: 500;
+      background: none;
+      color: #5C4A36;
+      padding: 0.2rem 0;
+      display: inline-block;
+      border-bottom: 1px dotted #DCCFBF;
+    }
+
+    .donation-area {
+      background: #FDFAF5;
+      border: 1px solid #E5D9CD;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+      .poetry-hero { flex-direction: column; }
+      .poetry-bg-side { min-height: 280px; }
+      .nav-container { flex-direction: column; align-items: center; }
+      .wrapper { padding: 0 1.2rem; }
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.7rem; }
+    }
+    @media (max-width: 550px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    }
+@media (max-width: 700px) {
+  #home-page .hero-split {
+    flex-direction: column;
+    text-align: center;
+  }
+  #home-page .hero-split h1 {
+    text-align: center;
+  }
+  #home-page .floral-divider {
+    text-align: center !important;
+  }
+}
+    @media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block !important;
+  }
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+}
+    
+
+/* Mobile Menu */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #F5EAD8;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block !important;
+    }
+    .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+    .nav-links.show {
+        display: flex;
+    }
+    .nav-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+  </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Elena Whitmore</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#books">Books</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+<nav>
+  <div class="nav-container">
+    <div class="logo">Hadiza Bagudu</div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" style="display: none; background: none; border: none; color: #F5EAD8; font-size: 1.8rem; cursor: pointer;">☰</button>
+    <div class="nav-links">
+      <a href="#" data-page="home">Home</a>
+      <a href="#" data-page="about">About</a>
+      <a href="#" data-page="books">Books</a>
+      <a href="#" data-page="recipes">Recipes</a>
+      <a href="#" data-page="blog">Journal</a>
+      <a href="#" data-page="poetry">Poetry</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrapper">
+ <!-- HOME PAGE – redesigned hero with your book image as the star -->
+<div id="home-page" class="page active-page">
+  
+  <!-- NEW HERO: split layout – text left, book image right -->
+  <div style="
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    background: #FCFAF7;
+    border: 1px solid #EFE6DD;
+    padding: 2rem;
+  ">
+    <!-- LEFT: text content -->
+    <div style="flex: 1.2; min-width: 240px;">
+      <div class="floral-divider" style="text-align: left; margin-bottom: 0.5rem;">✽ ✿ ✾</div>
+      <h1 style="font-size: 2.8rem; margin-bottom: 0.75rem;">Where ink meets soul.</h1>
+      <p style="font-size: 1.1rem; color: #4A3E32; margin-bottom: 1.5rem;">Hadiza Bagudu — award-winning author, poet, and keeper of untold stories.</p>
+      <a href="#" data-page="books" class="btn" style="display: inline-block; background:#FFFFFF; border-color:#B8A07E; padding: 0.7rem 1.8rem;">Explore the library →</a>
+    </div>
+    
+    <!-- RIGHT: your book image – prominent and elegant -->
+    <div style="flex: 1; min-width: 200px;">
+      <img 
+        src="https://i.pinimg.com/736x/a0/2f/d7/a02fd783bfb7edd548de6f930d69f21f.jpg" 
+        alt="Hadiza Bagudu book collection: The Thin Line, With Love, and more"
+        style="
+          width: 100%;
+          max-width: 320px;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+          box-shadow: 12px 12px 0 #EFE6DD;
+          border: 1px solid #E2D4C5;
+        "
+        onerror="this.src='https://via.placeholder.com/300x400?text=Books+by+Hadiza+Bagudu'; this.onerror=null;"
+      >
+    </div>
+  </div>
+
+  <!-- the rest of your home page content (featured book, recent titles, etc.) continues below -->
+  <!-- your existing sections like featured work, book grid, etc. stay here -->
+  
+    <section>
+ <div class="floral-divider">❀ ✿ ❀</div>
+
+      <h2>✦ Featured Work</h2>
+      <div class="feature-book">
+        <img src="https://i.pinimg.com/736x/d6/a2/b0/d6a2b012f0de0848c59e80d9f6e27d96.jpg" alt="Ripples" style="width: 180px; border: 1px solid #E1D6CA; box-shadow: 6px 6px 0 #F5EFE7;">
+        <div>
+          <h3>Ripples: A Collection of Poems</h3>
+          <p>“Hadiza writes like a whisper that becomes thunder. Her poetry lingers in the marrow.” — The African Review</p>
+          <div class="testimonial" style="margin: 0.8rem 0;">
+            “A masterpiece of vulnerability and power. Each poem is a mirror and a window.” — Poetry Foundation
+          </div>
+          <a href="https://hadizab.github.io/ripples-/" target="_blank" class="btn-outline btn">Read excerpt →</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top: 2.5rem;">
+      <h2>📖 Recent Titles</h2>
+      <div class="grid-3">
+        <div class="book-card"><img src="https://assets.lulu.com/cover_thumbs/z/m/zmrkky2-ebook-shortedge-384.jpg" alt="Fantah"><p>Fantah</p><a href="https://hadizab.github.io/fantah/" target="_blank">explore →</a></div>
+        <div class="book-card"><img src="https://assets.lulu.com/cover_thumbs/7/k/7k899q6-ebook-shortedge-384.jpg" alt="Extraordinary"><p>An Extraordinary Experience</p><a href="https://hadizab.github.io/epic/" target="_blank">explore →</a></div>
+        <div class="book-card"><img src="https://assets.lulu.com/cover_thumbs/e/7/e7d88w5-ebook-shortedge-384.jpg" alt="Thin Line"><p>The Thin Line</p><a href="https://hadizab.github.io/Thethinline.github.io/" target="_blank">full book →</a></div>
+      </div>
+      <a href="#" data-page="books" class="btn" style="margin-top: 1rem;">All books & editions →</a>
+    </section>
+
+    <div class="floral-divider">❀ ✿ ❀</div>
+<!-- Astral Series Promo Section -->
+  <section class="astral-series-promo" style="margin: 2.5rem 0; background: #FFFFFF; border: 1px solid #ECE3D8; overflow: hidden; transition: all 0.2s ease;">
+    <div style="display: flex; flex-wrap: wrap; align-items: stretch; margin: 0; padding: 0;">
+      <div class="astral-image-col" style="flex: 1.2; min-width: 200px; background-image: url('https://pixabay.com/get/g8ea77e4c6fae0566780211aabb5fe0fc12a1d67827d1c0205e62f6ed172d584b8f51b10b936c5657d7857c473115556dd9a2a17f3e862d87dd9811e228d7c198_1920.jpg'); background-size: cover; background-position: center 35%; min-height: 400px; position: relative;">
+        <div class="astral-overlay" style="position: absolute; top: 0; right: 0; width: 35%; height: 100%; background: linear-gradient(90deg, rgba(255,255,245,0) 0%, #FFFFFF 100%); pointer-events: none;"></div>
+      </div>
+      <div class="astral-text-col" style="flex: 1; background: #FFFFFF; padding: 2rem 2.2rem; display: flex; flex-direction: column; justify-content: center;">
+        <div style="margin-bottom: 0.7rem;">
+          <span style="font-family: 'Inter', sans-serif; font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; color: #9E8262; background: #FCF8F2; padding: 0.2rem 0.8rem; border-left: 2px solid #C9AA7B;">✦ THE ASTRAL SAGA</span>
+        </div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 500; color: #1E1A16; margin-bottom: 0.65rem;">Astral Series</h3>
+        <p style="font-family: 'Inter', sans-serif; font-size: 1rem; font-style: italic; color: #5C4E3C; margin-bottom: 1rem; border-left: 2px solid #E2D4C5; padding-left: 1rem;">“A journey beyond the veil of reality...”</p>
+        <p style="font-size: 0.95rem; line-height: 1.6; color: #2C241C; margin-bottom: 1.6rem;">Yusuf's remarkable abilities open the doors to hidden worlds and long-buried secrets in this unforgettable tale. With a rich blend of mystery, romance, and the supernatural, this story pulls you in and keeps you hooked from start to finish.</p>
+        <a href="https://hadizab.github.io/astral/" target="_blank" class="astral-read-now" style="display: inline-flex; align-items: center; gap: 0.7rem; background: transparent; border: 1px solid #C6B194; padding: 0.65rem 1.8rem; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.8rem; letter-spacing: 1.2px; text-transform: uppercase; color: #2E241D; text-decoration: none; transition: 0.2s; width: fit-content;" onmouseover="this.style.backgroundColor='#FCF7F0'; this.style.borderColor='#A88761'; this.style.color='#1C1813'" onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='#C6B194'; this.style.color='#2E241D'">Read Now <span style="font-size: 1.1rem;">→</span></a>
+      </div>
+    </div>
+    <div style="height: 1px; background: linear-gradient(90deg, #EADDCB, #DBCAAE, #EADDCB); width: 90%; margin: 0 auto;"></div>
+    <div style="text-align: center; font-size: 0.7rem; letter-spacing: 3px; color: #CAB99F; padding: 0.6rem 0; font-family: monospace;">✧ where worlds unravel ✧</div>
+  </section>
+
+    
+    <div class="floral-divider">❀ ✿ ❀</div>
+    
+    <section style="margin: 2rem 0;">
+      <div class="grid-2">
+        <div class="highlight">
+          <h3>✎ Latest from the Journal</h3>
+          <p><strong>“The Architecture of Nigerian Fantasy”</strong> — On worldbuilding in Fantah & Astral. New essay.</p>
+          <a href="https://www.hadizab.com/hadizas-blogs" target="_blank" class="btn-outline btn" style="padding: 0.4rem 1.2rem;">Read full →</a>
+        </div>
+
+        <div class="highlight">
+          <h3>𓂀 Featured Poem: “Ripples”</h3>
+          <p><em>“I have been water & fire, now I am simply — here.”</em> A meditation on becoming.</p>
+          <a href="#" data-page="poetry" class="btn-outline btn">Discover poetry →</a>
+        </div>
+      </div>
+      <div style="background: #FCF9F4; padding: 1.4rem; margin-top: 1rem; text-align: center; border: 1px solid #E8DFD3;">
+    <p style="font-weight: 450;">📬 Join the reading circle — new releases, letters, and quiet giveaways.</p>
+    <a href="https://wa.link/szzomn" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+        <button id="joinWhatsAppBtnHome" class="join-wa-btn" style="background: white; cursor: pointer;">➕ Join WhatsApp</button>
+    </a>
+</div>
+    </section>
+  </div>
+
+ <!-- ABOUT PAGE – first-person narrative with visual timeline -->
+<div id="about-page" class="page">
+  
+  <!-- HERO: Weaving Words, Bridging Worlds -->
+  <div style="background: #FCFAF7; padding: 2rem 2rem; margin-bottom: 2rem; border: 1px solid #EFE6DD; text-align: center;">
+    <div class="floral-divider">✽ ✿ ✾</div>
+    <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">Weaving Words, Bridging Worlds</h1>
+    <p style="font-size: 1.1rem; color: #4A3E32; max-width: 700px; margin: 0 auto;">
+      I am a Nigerian writer, poet, blogger, podcaster, and entrepreneur based in Abuja. 
+      With roots in both creative literature and academic research, I bridge the worlds of artistic expression and scholarly analysis.
+    </p>
+  </div>
+
+  <!-- IMAGE & TEXT SIDE-BY-SIDE -->
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; margin: 2rem 0 3rem; padding: 0 1rem;">
+    <!-- LEFT: Image -->
+    <div style="flex: 1; min-width: 250px;">
+      <img src="https://i.pinimg.com/736x/e0/34/fb/e034fbcc8fd949a7c5809d305dff4e71.jpg" 
+           alt="Hadiza Bagudu - Writing" 
+           style="width: 100%; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+    </div>
+    
+    <!-- RIGHT: Text Content -->
+    <div style="flex: 1; min-width: 250px;">
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #2c3e50; margin-bottom: 1rem;">About Me</h2>
+      <p style="color: #5d6d7e; line-height: 1.8; margin-bottom: 1rem;">
+        My journey as a storyteller began long before I put pen to paper. Growing up in Northern Nigeria, 
+        I was surrounded by rich oral traditions—folktales told under moonlight, proverbs that carried generations of wisdom, 
+        and poetry that danced between Hausa, Arabic, and English.
+      </p>
+      <p style="color: #5d6d7e; line-height: 1.8; margin-bottom: 1rem;">
+        These early influences shaped my desire to capture the human experience in all its complexity. 
+        My work explores themes of faith, identity, love, and the delicate threads that connect us across cultures.
+      </p>
+      <p style="color: #5d6d7e; line-height: 1.8;">
+        Today, I write to bridge worlds—between tradition and modernity, between Nigeria and the global stage, 
+        between the spiritual and the everyday. Every word I craft is an invitation to see the world through new eyes.
+      </p>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-around; text-align: center; gap: 1.5rem; margin: 2rem 0 3rem; padding: 1.5rem; background: #FFFFFF; border: 1px solid #EBE2D6;">
+    <div><span style="font-size: 2rem; font-weight: 600; color: #8A6F4C;">10+</span><br>Years Writing</div>
+    <div><span style="font-size: 2rem; font-weight: 600; color: #8A6F4C;">3</span><br>Novels</div>
+    <div><span style="font-size: 2rem; font-weight: 600; color: #8A6F4C;">50+</span><br>Poems</div>
+    <div><span style="font-size: 2rem; font-weight: 600; color: #8A6F4C;">5k+</span><br>Readers</div>
+  </div>
+
+  <!-- MAIN STORY – first person -->
+  <div style="display: flex; flex-wrap: wrap; gap: 2.5rem; margin-bottom: 3rem;">
+    <div style="flex: 1.5;">
+      <h2>My Story</h2>
+      <p><strong>In my early years, at primary school, in the 1980s,</strong> I stumbled upon an amazing poem about scars. Our teacher, bless her heart, explained how scars aren't just physical marks but reminders of the battles we've fought. That lesson stuck with me, inspiring me to write two poetry collections and four novels since then.</p>
+      
+      <p>Despite my natural shyness and reluctance to participate in public events like poetry readings and competitions, I've found joy in sharing my work online, thanks to the wonders of technology. My academic journey includes earning a BSc in International Studies from A.B.U Zaria and an MSc in International Relations and Diplomacy from Nile University, Abuja — completing my thesis in 2024 on COVID-19 vaccine nationalism and dependency in Africa.</p>
+      
+      <p>Today, I'm happily settled in Abuja, Nigeria, with my husband and two children, embracing the balance between family life and my passion for writing and learning.</p>
+      
+      <div style="margin: 2rem 0; padding: 1.5rem; background: #FCFAF7; border-left: 3px solid #C7B59B; font-style: italic;">
+        <p style="margin-bottom: 0.5rem;">“Stories are bridges between souls. They allow us to walk in another's shoes, to feel their joys and sorrows, and to recognize ourselves in the unfamiliar.”</p>
+        <p style="font-weight: 500;">— On the power of narrative</p>
+      </div>
+    </div>
+    
+    <!-- SIDEBAR: Fascinating facts -->
+    <div style="flex: 1; background: #FDFBF8; padding: 1.5rem; border: 1px solid #EBE2D6; align-self: start;">
+      <h3 style="margin-top: 0;">✦ Fascinating Things About Me</h3>
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li style="margin-bottom: 0.8rem;">🗣️ I speak <strong>3 languages</strong> fluently: English, Hausa, and Fulfulde. And I can also read and write Arabic.</li>
+        <li style="margin-bottom: 0.8rem;">💻 I am a Microsoft certified professional and have web-designing skills.</li>
+        <li style="margin-bottom: 0.8rem;">🌀 I have a fear of wobbly ceiling fans. Why? Well... gravity. Duh!</li>
+        <li style="margin-bottom: 0.8rem;">🐱 I love cats.</li>
+      </ul>
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #EBE2D6;">
+        <p><strong>📍 Currently:</strong> Abuja, Nigeria</p>
+        <p><strong>📚 Latest:</strong> "An Epic Journey of Faith" (2024)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISUAL TIMELINE -->
+  <h2>✦ My Journey — From Abuja to the world</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 2rem 0 3rem;">
+    <div style="flex: 1; min-width: 140px; background: #FFFFFF; border: 1px solid #EBE2D6; padding: 1rem; text-align: center;">
+      <div style="width: 40px; height: 40px; background: #C7B59B; margin: -1.8rem auto 0.8rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">✨</div>
+      <strong style="color: #8A6F4C;">1980s</strong>
+      <p style="font-size: 0.85rem;">Discovered the poem about scars that changed everything.</p>
+    </div>
+    <div style="flex: 1; min-width: 140px; background: #FFFFFF; border: 1px solid #EBE2D6; padding: 1rem; text-align: center;">
+      <div style="width: 40px; height: 40px; background: #C7B59B; margin: -1.8rem auto 0.8rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">📖</div>
+      <strong style="color: #8A6F4C;">2008</strong>
+      <p style="font-size: 0.85rem;">First poetry collection, "With Love."</p>
+    </div>
+    <div style="flex: 1; min-width: 140px; background: #FFFFFF; border: 1px solid #EBE2D6; padding: 1rem; text-align: center;">
+      <div style="width: 40px; height: 40px; background: #C7B59B; margin: -1.8rem auto 0.8rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">📚</div>
+      <strong style="color: #8A6F4C;">2014</strong>
+      <p style="font-size: 0.85rem;">Published "Fantah" and "The Thin Line."</p>
+    </div>
+    <div style="flex: 1; min-width: 140px; background: #FFFFFF; border: 1px solid #EBE2D6; padding: 1rem; text-align: center;">
+      <div style="width: 40px; height: 40px; background: #C7B59B; margin: -1.8rem auto 0.8rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">🕋</div>
+      <strong style="color: #8A6F4C;">2019</strong>
+      <p style="font-size: 0.85rem;">Journey to Hajj — transformed my creative vision.</p>
+    </div>
+    <div style="flex: 1; min-width: 140px; background: #FFFFFF; border: 1px solid #EBE2D6; padding: 1rem; text-align: center;">
+      <div style="width: 40px; height: 40px; background: #C7B59B; margin: -1.8rem auto 0.8rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">🎙️</div>
+      <strong style="color: #8A6F4C;">2020</strong>
+      <p style="font-size: 0.85rem;">Launched "Words & Worship" podcast.</p>
+    </div>
+    <div style="flex: 1; min-width: 140px; background: #FFFFFF; border: 1px solid #EBE2D6; padding: 1rem; text-align: center;">
+      <div style="width: 40px; height: 40px; background: #C7B59B; margin: -1.8rem auto 0.8rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">🎓</div>
+      <strong style="color: #8A6F4C;">2024</strong>
+      <p style="font-size: 0.85rem;">Completed MSc thesis. Published "An Epic Journey of Faith."</p>
+    </div>
+  </div>
+
+  <!-- WHAT I DO -->
+  <h2>✦ What I Do</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin: 1.5rem 0 2.5rem;">
+    <div style="text-align: center; padding: 1rem; border: 1px solid #EBE2D6;"><strong>📖 Author</strong><br><small>Novels & poetry</small></div>
+    <div style="text-align: center; padding: 1rem; border: 1px solid #EBE2D6;"><strong>🎙️ Podcaster</strong><br><small>"Words & Worship"</small></div>
+    <div style="text-align: center; padding: 1rem; border: 1px solid #EBE2D6;"><strong>🤝 Mentor</strong><br><small>Writing workshops</small></div>
+    <div style="text-align: center; padding: 1rem; border: 1px solid #EBE2D6;"><strong>💼 Entrepreneur</strong><br><small>Hadiza Bagudu Enterprises</small></div>
+    <div style="text-align: center; padding: 1rem; border: 1px solid #EBE2D6;"><strong>✍️ Blogger</strong><br><small>Writing & faith</small></div>
+    <div style="text-align: center; padding: 1rem; border: 1px solid #EBE2D6;"><strong>🎤 Speaker</strong><br><small>Literary festivals</small></div>
+  </div>
+
+ 
+
+  <!-- FAQ -->
+  <h2>❓ Frequently Asked Questions</h2>
+  <div id="aboutFaqContainer">
+    <div class="faq-item"><div class="faq-question">What inspired you to write Fantah? <span>+</span></div><div class="faq-answer">This novel was inspired by the rich cultural history of Northern Nigeria. Fantah and Hayah reflect real emotional journeys, exploring themes of cultural identity, love, and adventure.</div></div>
+    <div class="faq-item"><div class="faq-question">What inspired you to become a writer? <span>+</span></div><div class="faq-answer">Growing up in Nigeria, I was surrounded by rich oral traditions that ignited my imagination. My first poetry collection was a natural outpouring during my university years.</div></div>
+    <div class="faq-item"><div class="faq-question">Where can I buy your books? <span>+</span></div><div class="faq-answer">On Lulu, KoboBooks, Amazon, and directly through my website. Physical copies in select Abuja bookstores.</div></div>
+    <div class="faq-item"><div class="faq-question">Do you offer writing workshops? <span>+</span></div><div class="faq-answer">Yes, online and in-person in Abuja. Visit the Events section of my website for current offerings.</div></div>
+  </div>
+
+  <!-- INTERVIEWS -->
+  <h2>🎤 Interviews & Media</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0 2rem;">
+    <a href="#" style="color: #8A6F4C;">NTA interview</a> • <a href="#" style="color: #8A6F4C;">Akweya TV</a> • <a href="#" style="color: #8A6F4C;">Trust TV Book Review</a> • <a href="#" style="color: #8A6F4C;">YouTube Channel</a>
+  </div>
+
+  <!-- BEYOND THE PAGE -->
+  <div style="background: #FCFAF7; padding: 2rem; margin: 2rem 0; border: 1px solid #EBE2D6;">
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+      <div style="flex: 1.5;">
+        <h3 style="margin-top: 0;">Beyond the Page</h3>
+        <p><em>“I am a collector of moments, a lover of quiet, and a seeker of truth.”</em></p>
+        <p>When I'm not writing, you'll find me experimenting in the kitchen, creating recipes that blend Northern Nigerian flavors with international cuisine. I'm an introvert who recharges in solitude but comes alive in deep conversations.</p>
+        <p>My faith is the anchor of my life and work. The journey to Hajj in 2019 transformed my creative vision — it became the seed for <em>“An Epic Journey of Faith.”</em></p>
+      </div>
+      <div style="flex: 1; display: flex; flex-wrap: wrap; gap: 0.6rem;">
+        <span style="background: white; padding: 0.3rem 0.8rem; border: 1px solid #E2D4C5;">📚 Reading</span>
+        <span style="background: white; padding: 0.3rem 0.8rem; border: 1px solid #E2D4C5;">🍳 Cooking</span>
+        <span style="background: white; padding: 0.3rem 0.8rem; border: 1px solid #E2D4C5;">🧘‍♀️ Exercise</span>
+        <span style="background: white; padding: 0.3rem 0.8rem; border: 1px solid #E2D4C5;">🌱 Gardening</span>
+        <span style="background: white; padding: 0.3rem 0.8rem; border: 1px solid #E2D4C5;">☕ Tea</span>
+        <span style="background: white; padding: 0.3rem 0.8rem; border: 1px solid #E2D4C5;">🕌 Faith</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <h2>📸 Event Gallery</h2>
+  <!-- EVENT GALLERY (UPDATED) -->
+<div class="event-gallery-single" style="margin: 2rem 0; text-align: center;">
+  <a href="https://www.pinterest.com/baguduhadiza2/events/" target="_blank" rel="noopener noreferrer">
+    <img 
+      src="https://i.pinimg.com/736x/92/0f/e1/920fe19c024b9c02b9ac578c8a37c767.jpg" 
+      alt="Hadiza Bagudu - Event Gallery. Click to see more on Pinterest." 
+      style="width: 100%; max-width: 700px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: transform 0.2s ease; cursor: pointer;"
+      onmouseover="this.style.transform='scale(1.02)'"
+      onmouseout="this.style.transform='scale(1)'"
+    >
+  </a>
+  <p style="margin-top: 0.75rem; font-size: 0.85rem; color: #5d6d7e;">
+    📌 Click the image to explore our event memories on Pinterest
+  </p>
+</div>
+
+</div>
+
+
+<script>
+  // FAQ toggle for about page
+  document.querySelectorAll('#aboutFaqContainer .faq-item').forEach(item => {
+    const qDiv = item.querySelector('.faq-question');
+    const ans = item.querySelector('.faq-answer');
+    if (qDiv && ans) {
+      qDiv.addEventListener('click', () => {
+        ans.classList.toggle('show');
+        const span = qDiv.querySelector('span');
+        if (span) span.textContent = ans.classList.contains('show') ? '−' : '+';
+      });
+    }
+  });
+  
+  // Gallery images
+  const galleryAbout = document.getElementById('eventsGalleryAbout');
+  if(galleryAbout){
+    const imgs = [
+      'https://i.pinimg.com/736x/31/d1/22/31d122c249c3cf6cfa9bd8c47f657c2d.jpg',
+      'https://i.pinimg.com/736x/e1/83/ef/e183ef96734ac0bdf8568689ea87ce68.jpg',
+      'https://i.pinimg.com/736x/94/c4/15/94c4156c0a756ff404975ee417fda3eb.jpg'
+    ];
+    imgs.forEach(src => { const img = document.createElement('img'); img.src = src; img.alt = 'Event photo'; galleryAbout.appendChild(img); });
+  }
+</script>
+
+<style>
+  .faq-item {
+    border-top: 1px solid #E3D9CF;
+    padding: 0.8rem 0;
+  }
+  .faq-question {
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+  }
+  .faq-answer {
+    display: none;
+    padding: 0.5rem 0 0.5rem 1rem;
+    border-left: 2px solid #CBB99E;
+    margin-top: 0.3rem;
+    color: #4F4438;
+  }
+  .faq-answer.show {
+    display: block;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .gallery-grid img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border: 1px solid #EDE5DB;
+  }
+</style>
+
+<!-- BOOKS PAGE -->
+<div id="books-page" class="page">
+  <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: #2c3e50; margin-bottom: 0.5rem;">Complete Bibliography</h2>
+  <p style="margin-bottom: 2rem; color: #5d6d7e;">Explore collected works — poetry, speculative fiction, and literary prose.</p>
+  
+  <div class="grid-3" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+    
+    <!-- Book 1 - Fantah -->
+    <div class="book-card" style="background: white; border-radius: 16px; padding: 1.5rem; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+      <a href="https://hadizab.github.io/fantah/" target="_blank">
+        <img src="https://assets.lulu.com/cover_thumbs/z/m/zmrkky2-ebook-shortedge-384.jpg" alt="Fantah cover" style="width: 100%; max-width: 200px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 1rem; transition: transform 0.3s ease;">
+      </a>
+      <p style="font-size: 0.8rem; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">A Novel</p>
+      <a href="https://hadizab.github.io/fantah/" target="_blank" style="text-decoration: none; color: #2c3e50; font-weight: 500; display: block; margin-bottom: 1rem; line-height: 1.5; flex-grow: 1;">"The compelling journey of Fantah, a determined Bororo girl, and Hayah, a prince seeking redemption, takes readers on an unforgettable expedition through diverse landscapes and intriguing kingdoms."</a>
+      <a href="https://hadizab.github.io/fantah/" target="_blank" style="display: inline-block; background: #d4a373; color: white; padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; margin-top: auto; align-self: center;">📖 Read Now →</a>
+    </div>
+    
+    <!-- Book 2 - Epic Journey of Faith -->
+    <div class="book-card" style="background: white; border-radius: 16px; padding: 1.5rem; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+      <a href="https://hadizab.github.io/epic/" target="_blank">
+        <img src="https://assets.lulu.com/cover_thumbs/7/k/7k899q6-ebook-shortedge-384.jpg" alt="Epic Journey of Faith cover" style="width: 100%; max-width: 200px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 1rem; transition: transform 0.3s ease;">
+      </a>
+      <p style="font-size: 0.8rem; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">A Novel</p>
+      <a href="https://hadizab.github.io/epic/" target="_blank" style="text-decoration: none; color: #2c3e50; font-weight: 500; display: block; margin-bottom: 1rem; line-height: 1.5; flex-grow: 1;">"They met on the journey of a lifetime—Hajj. From strangers to companions in faith, each step revealed a piece of themselves they never knew they had lost."</a>
+      <a href="https://hadizab.github.io/epic/" target="_blank" style="display: inline-block; background: #d4a373; color: white; padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; margin-top: auto; align-self: center;">📖 Read Now →</a>
+    </div>
+    
+    <!-- Book 3 - Melody -->
+    <div class="book-card" style="background: white; border-radius: 16px; padding: 1.5rem; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+      <a href="https://hadizab.github.io/Melody-2/" target="_blank">
+        <img src="https://assets.lulu.com/cover_thumbs/5/7/578gg69-ebook-shortedge-384.jpg" alt="Melody cover" style="width: 100%; max-width: 200px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 1rem; transition: transform 0.3s ease;">
+      </a>
+      <p style="font-size: 0.8rem; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">A Novel</p>
+      <a href="https://hadizab.github.io/Melody-2/" target="_blank" style="text-decoration: none; color: #2c3e50; font-weight: 500; display: block; margin-bottom: 1rem; line-height: 1.5; flex-grow: 1;">"Melody's journey from humble beginnings to global fame is a tale of resilience, sacrifice, and determination in the brutal world of fame."</a>
+      <a href="https://hadizab.github.io/Melody-2/" target="_blank" style="display: inline-block; background: #d4a373; color: white; padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; margin-top: auto; align-self: center;">📖 Read Now →</a>
+    </div>
+    
+    <!-- Book 4 - With Love (Poetry) -->
+    <div class="book-card" style="background: white; border-radius: 16px; padding: 1.5rem; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+      <a href="https://hadizab.github.io/withlove/" target="_blank">
+        <img src="https://assets.lulu.com/cover_thumbs/j/e/jednnjg-ebook-shortedge-384.jpg" alt="With Love cover" style="width: 100%; max-width: 200px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 1rem; transition: transform 0.3s ease;">
+      </a>
+      <p style="font-size: 0.8rem; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Poetry</p>
+      <a href="https://hadizab.github.io/withlove/" target="_blank" style="text-decoration: none; color: #2c3e50; font-weight: 500; display: block; margin-bottom: 1rem; line-height: 1.5; flex-grow: 1;">"A collection of poems about Love, Life, Happiness and Faith. Short and sweet, with a musical theme that provides hours of poetic entertainment."</a>
+      <a href="https://hadizab.github.io/withlove/" target="_blank" style="display: inline-block; background: #d4a373; color: white; padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; margin-top: auto; align-self: center;">📖 Read Now →</a>
+    </div>
+    
+    <!-- Book 5 - The Thin Line -->
+    <div class="book-card" style="background: white; border-radius: 16px; padding: 1.5rem; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+      <a href="https://hadizab.github.io/Thethinline.github.io/" target="_blank">
+        <img src="https://assets.lulu.com/cover_thumbs/e/7/e7d88w5-ebook-shortedge-384.jpg" alt="The Thin Line cover" style="width: 100%; max-width: 200px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 1rem; transition: transform 0.3s ease;">
+      </a>
+      <p style="font-size: 0.8rem; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">A Novel</p>
+      <a href="https://hadizab.github.io/Thethinline.github.io/" target="_blank" style="text-decoration: none; color: #2c3e50; font-weight: 500; display: block; margin-bottom: 1rem; line-height: 1.5; flex-grow: 1;">"A captivating tale of love, friendship, betrayal, and family set in Kaduna State, Nigeria. Through heartache and joy, relationships are tested and strengthened."</a>
+      <a href="https://hadizab.github.io/Thethinline.github.io/" target="_blank" style="display: inline-block; background: #d4a373; color: white; padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; margin-top: auto; align-self: center;">📖 Read Now →</a>
+    </div>
+    
+    <!-- Book 6 - Quiet Parts (Poetry) -->
+    <div class="book-card" style="background: white; border-radius: 16px; padding: 1.5rem; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+      <a href="https://hadizab.github.io/quietparts/" target="_blank">
+        <img src="https://assets.lulu.com/cover_thumbs/5/7/578ggnn-ebook-shortedge-384.jpg" alt="Quiet Parts cover" style="width: 100%; max-width: 200px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 1rem; transition: transform 0.3s ease;">
+      </a>
+      <p style="font-size: 0.8rem; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Poetry</p>
+      <a href="https://hadizab.github.io/quietparts/" target="_blank" style="text-decoration: none; color: #2c3e50; font-weight: 500; display: block; margin-bottom: 1rem; line-height: 1.5; flex-grow: 1;">"A soulful journey weaving verse exploring the core of human experience through faith, love, friendship, and new beginnings."</a>
+      <a href="https://hadizab.github.io/quietparts/" target="_blank" style="display: inline-block; background: #d4a373; color: white; padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; margin-top: auto; align-self: center;">📖 Read Now →</a>
+    </div>
+    
+    <!-- Book 7 - Ripples (Poetry - Current) -->
+    <div class="book-card" style="background: white; border-radius: 16px; padding: 1.5rem; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%;">
+      <a href="https://hadizab.github.io/ripples-/" target="_blank">
+        <img src="https://i.pinimg.com/736x/d6/a2/b0/d6a2b012f0de0848c59e80d9f6e27d96.jpg" alt="Ripples cover" style="width: 100%; max-width: 200px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 1rem; transition: transform 0.3s ease;">
+      </a>
+      <p style="font-size: 0.8rem; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Poetry (Current)</p>
+      <a href="https://hadizab.github.io/ripples-/" target="_blank" style="text-decoration: none; color: #2c3e50; font-weight: 500; display: block; margin-bottom: 1rem; line-height: 1.5; flex-grow: 1;">"Ripples is a quiet, soul-stirring collection where each poem casts a stone into the still waters of memory, sending gentle waves through the heart that linger long after the last page is turned."</a>
+      <a href="https://hadizab.github.io/ripples-/" target="_blank" style="display: inline-block; background: #d4a373; color: white; padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; margin-top: auto; align-self: center;">📖 Read Now →</a>
+    </div>
+    
+  </div>
+
+  <!-- ASTRAL SERIES PROMO BANNER - Inside Books Page -->
+  <div class="astral-promo" style="width: 100%; margin: 4rem 0 2rem; position: relative; overflow: hidden; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+    
+    <!-- Background Image -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+      <img src="https://pixabay.com/get/g9f392baafce90f73b138af4c08726a5b3c8d3e55a68c50c139630afc21c9d5c1942cb6b04b1a4ba369c35b9e61a6d0c196fe9dd9d1bb34214b475cae22c0d522_1920.jpg" 
+           alt="Astral cosmic background" 
+           style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+      <!-- Dark overlay for text readability -->
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(10,10,42,0.85) 0%, rgba(26,26,62,0.8) 50%, rgba(13,13,53,0.85) 100%);"></div>
+    </div>
+    
+    <!-- Starfield animation overlay -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 1;">
+      <div class="stars" style="position: absolute; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 60px 90px, #f8f9fa, rgba(0,0,0,0)); background-size: 200px 200px, 150px 150px; background-repeat: repeat; opacity: 0.5;"></div>
+    </div>
+    
+    <!-- Main content -->
+    <div style="position: relative; z-index: 2; padding: 4rem 2rem; text-align: center;">
+      
+      <!-- Series badge -->
+      <div style="display: inline-block; background: rgba(212, 163, 115, 0.95); color: #0a0a2a; padding: 0.3rem 1.2rem; border-radius: 30px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; animation: fadeInDown 0.8s ease;">
+        ✦ SUPERNATURAL FANTASY SERIES ✦
+      </div>
+      
+      <!-- Title with glow effect -->
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 700; margin: 0 0 0.5rem; background: linear-gradient(135deg, #e8d5b7 0%, #d4a373 50%, #e8d5b7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 30px rgba(212, 163, 115, 0.5); letter-spacing: 3px; animation: fadeInUp 0.8s ease;">
+        ASTRAL
+      </h2>
+      
+      <!-- Subtitle -->
+      <p style="font-size: 1.3rem; color: #c4b5a0; letter-spacing: 4px; margin-bottom: 1.5rem; animation: fadeInUp 0.8s ease 0.1s backwards;">
+        ✧ THE AWAKENING ✧
+      </p>
+      
+      <!-- Description -->
+      <p style="max-width: 700px; margin: 0 auto 1.5rem; font-size: 1.05rem; line-height: 1.7; color: #e0d6c8; animation: fadeInUp 0.8s ease 0.2s backwards;">
+        "Embark on a cosmic odyssey where boundaries between worlds dissolve. Join Yusuf as he discovers the ancient art of astral projection and unlocks the secrets of inter-dimensional travel."
+      </p>
+      
+      <!-- Stats row -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; margin: 2rem 0; animation: fadeInUp 0.8s ease 0.3s backwards;">
+        <div style="text-align: center;">
+          <span style="font-size: 2.2rem; font-weight: 700; color: #d4a373;">∞</span>
+          <p style="font-size: 0.75rem; color: #a89a82; margin-top: 0.3rem; letter-spacing: 1px;">DIMENSIONS</p>
+        </div>
+        <div style="text-align: center;">
+          <span style="font-size: 2.2rem; font-weight: 700; color: #d4a373;">7</span>
+          <p style="font-size: 0.75rem; color: #a89a82; margin-top: 0.3rem; letter-spacing: 1px;">ASTRAL PLANES</p>
+        </div>
+        <div style="text-align: center;">
+          <span style="font-size: 2.2rem; font-weight: 700; color: #d4a373;">1</span>
+          <p style="font-size: 0.75rem; color: #a89a82; margin-top: 0.3rem; letter-spacing: 1px;">CHOSEN TRAVELER</p>
+        </div>
+        <div style="text-align: center;">
+          <span style="font-size: 2.2rem; font-weight: 700; color: #d4a373;">∞</span>
+          <p style="font-size: 0.75rem; color: #a89a82; margin-top: 0.3rem; letter-spacing: 1px;">POSSIBILITIES</p>
+        </div>
+      </div>
+      
+      <!-- Quote -->
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: #d4a373; margin: 1.5rem auto; max-width: 600px; border-left: 3px solid #d4a373; padding-left: 1.5rem; animation: fadeInUp 0.8s ease 0.4s backwards;">
+        "In the space between sleep and wakefulness lies the doorway to eternity."
+      </p>
+      
+      <!-- Button -->
+      <div style="animation: pulse 2s infinite; margin-top: 1.5rem;">
+        <a href="https://hadizab.github.io/astral/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.8rem; background: #d4a373; color: #0a0a2a; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(212, 163, 115, 0.4);">
+          <span>Explore the Astral Series</span>
+          <span style="font-size: 1.2rem;">→</span>
+        </a>
+      </div>
+      
+      <!-- Small note -->
+      <p style="font-size: 0.7rem; color: rgba(192, 176, 150, 0.6); margin-top: 2rem; animation: fadeInUp 0.8s ease 0.5s backwards;">
+        Book One Available Now
+      </p>
+    </div>
+  </div>
+
+  <!-- DONATION AREA - Inside Books Page -->
+  <div class="donation-area" style="background: #FDFAF5; border: 1px solid #E5D9CD; padding: 2rem; text-align: center; margin-top: 2rem;">
+    <span class="floral-icon">☕</span>
+    <h3 style="margin-top: 0.5rem;">Support the words</h3>
+    <a href="https://www.paypal.com/donate?business=mammy546@gmail.com" target="_blank" class="coffee-btn" style="display: inline-block; background: transparent; color: #1C1C1C; padding: 0.7rem 1.8rem; font-weight: 500; border: 1px solid #B9A788; cursor: pointer; text-align: center; transition: 0.25s; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-family: 'Inter', sans-serif;">Buy me a coffee</a>
+  </div>
+
+</div>
+
+<style>
+  .book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  }
+  .book-card img:hover {
+    transform: scale(1.02);
+  }
+  .book-card a:first-of-type:not(.read-now):hover {
+    color: #d4a373;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.03);
+    }
+  }
+  
+  .astral-promo {
+    animation: fadeInUp 0.6s ease;
+  }
+  
+  .astral-promo a:hover {
+    background: #c4925f;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212, 163, 115, 0.5);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .astral-promo h2 {
+      font-size: 2.8rem !important;
+    }
+    .astral-promo > div {
+      padding: 2rem 1rem !important;
+    }
+    .astral-promo p {
+      font-size: 0.9rem !important;
+    }
+    .stats-row {
+      gap: 1rem !important;
+    }
+  }
+</style>
+ <!-- RECIPES PAGE – A Taste of Nigeria: Stories from the Kitchen -->
+<div id="recipes-page" class="page">
+  
+  <!-- Hero section -->
+  <div style="background: #FCFAF7; padding: 2rem 2rem; margin-bottom: 2.5rem; border: 1px solid #EFE6DD; text-align: center;">
+    <div class="floral-divider">✽ ✿ ✾</div>
+    <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">A Taste of Nigeria</h1>
+    <p style="font-size: 1rem; color: #4A3E32; max-width: 600px; margin: 0 auto;">Stories from my kitchen — where flavor meets memory, and every dish carries a piece of home.</p>
+  </div>
+
+  <!-- RECIPE 1: Nigerian Peppered Chicken -->
+  <div class="recipe-item" style="margin-bottom: 3rem; border-bottom: 1px solid #EBE2D6; padding-bottom: 2rem;">
+    <div class="recipe-layout" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+      <div class="recipe-image" style="flex: 1; min-width: 250px;">
+        <img src="https://static.wixstatic.com/media/0a0ba1_3244ec1d42fc464d8f496233e36e9d7d~mv2.jpeg/v1/fill/w_960,h_499,al_c,q_85,enc_avif,quality_auto/0a0ba1_3244ec1d42fc464d8f496233e36e9d7d~mv2.jpeg" 
+             alt="Nigerian Peppered Chicken" 
+             style="width: 100%; height: 250px; border: 1px solid #E2D4C5; box-shadow: 4px 4px 0 #F5EFE7; object-fit: cover;">
+      </div>
+      <div class="recipe-content" style="flex: 2; min-width: 280px;">
+        <h2 style="border-bottom: none; margin-bottom: 0.25rem;">🍗 Nigerian Peppered Chicken</h2>
+        <p style="color: #8A6F4C; font-style: italic; margin-bottom: 1rem;">Deeply spiced, crispy fried chicken tossed in a rich, fragrant pepper sauce.</p>
+        <div class="recipe-meta" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">⏱️ Prep: 20 mins</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">🍲 Cook: 25 mins</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">👥 Serves: 6-8</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">🌶️ Heat: Bold</span>
+        </div>
+        
+        <details style="margin-bottom: 0.8rem;">
+          <summary style="font-weight: 600; cursor: pointer; color: #5E4B34; padding: 0.3rem 0;">🌿 View Ingredients</summary>
+          <ul style="margin-top: 0.8rem; margin-left: 1.5rem; line-height: 1.6;">
+            <li>1 whole chicken (cut into pieces)</li>
+            <li>1 large or 2 medium bell peppers</li>
+            <li>4 attarugu (scotch bonnet) or hot peppers</li>
+            <li>1 tomato, 1 large onion</li>
+            <li>Salt, curry powder, thyme, chicken seasoning</li>
+            <li>1 double Knorr chicken cube and 1 Royco cube</li>
+            <li>Oil for frying</li>
+          </ul>
+        </details>
+        
+        <details style="margin-bottom: 0.8rem;">
+          <summary style="font-weight: 600; cursor: pointer; color: #5E4B34; padding: 0.3rem 0;">📖 View Method</summary>
+          <ol style="margin-top: 0.8rem; margin-left: 1.5rem; line-height: 1.6;">
+            <li><strong>Boil the Chicken:</strong> Cut chicken into pieces, wash, and place in a pot with 1 tsp salt, ½ tsp curry, chicken seasoning, Royco cube, thyme, and half the chopped onion. Cover and cook for 30 mins until soft.</li>
+            <li><strong>Fry the Chicken:</strong> Remove chicken pieces and deep-fry in hot oil until golden brown. Set aside.</li>
+            <li><strong>Prepare the Pepper Sauce:</strong> Blend remaining onion, bell peppers, hot peppers, tomato, and garlic. Cook mixture until water dries up, then add oil and fry until oil separates.</li>
+            <li><strong>Combine and Finish:</strong> Season sauce with ½ tsp salt, curry, chicken seasoning, thyme, and 1 Knorr cube. Fry 30 seconds, then add fried chicken. Mix well and fry another 30 seconds.</li>
+          </ol>
+          <p style="margin-top: 0.8rem; font-style: italic; color: #8A6F4C;">✨ Serve hot with jollof rice, fried rice, boiled yam, or plantain.</p>
+        </details>
+        
+        <div style="background: #FDFBF8; padding: 0.8rem; margin-top: 1rem; border-left: 3px solid #C7B59B;">
+          <strong>👨🏾‍🍳 Chef's Tips:</strong> The 30+30 seconds rule keeps chicken crispy. Add smoked paprika for extra smokiness. Reduce scotch bonnets to 2 for milder heat.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECIPE 2: Eba & Okro Soup -->
+  <div class="recipe-item" style="margin-bottom: 3rem; border-bottom: 1px solid #EBE2D6; padding-bottom: 2rem;">
+    <div class="recipe-layout" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+      <div class="recipe-image" style="flex: 1; min-width: 250px;">
+        <img src="https://static.wixstatic.com/media/0a0ba1_ab338b07291d4e6680052ad1a538bdbc~mv2.jpg/v1/fill/w_1646,h_855,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0a0ba1_ab338b07291d4e6680052ad1a538bdbc~mv2.jpg" 
+             alt="Eba & Okro Soup" 
+             style="width: 100%; height: 250px; border: 1px solid #E2D4C5; box-shadow: 4px 4px 0 #F5EFE7; object-fit: cover;">
+      </div>
+      <div class="recipe-content" style="flex: 2; min-width: 280px;">
+        <h2 style="border-bottom: none; margin-bottom: 0.25rem;">🥣 Eba & Okro Soup</h2>
+        <p style="color: #8A6F4C; font-style: italic; margin-bottom: 1rem;">Smooth, golden eba paired with rich, slimy okra soup — a wholesome taste of home.</p>
+        <div class="recipe-meta" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">⏱️ Prep: 20 mins</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">🍲 Cook: 55 mins</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">👥 Serves: 6-8</span>
+        </div>
+        
+        <details style="margin-bottom: 0.8rem;">
+          <summary style="font-weight: 600; cursor: pointer; color: #5E4B34; padding: 0.3rem 0;">🌿 View Ingredients</summary>
+          <ul style="margin-top: 0.8rem; margin-left: 1.5rem; line-height: 1.6;">
+            <li>500g beef (cut into chunks)</li>
+            <li>2 cups okra (chopped)</li>
+            <li>1 onion (chopped)</li>
+            <li>2 scotch bonnet peppers</li>
+            <li>1 bell pepper, 1 tomato</li>
+            <li>1 tsp iru (locust beans)</li>
+            <li>1 tsp liquid potash (akanwu)</li>
+            <li>Seasoning cubes, salt, curry, thyme</li>
+            <li>2 cups garri (for eba)</li>
+          </ul>
+        </details>
+        
+        <details style="margin-bottom: 0.8rem;">
+          <summary style="font-weight: 600; cursor: pointer; color: #5E4B34; padding: 0.3rem 0;">📖 View Method</summary>
+          <p style="margin-top: 0.8rem; line-height: 1.6;"><strong>Okro Soup:</strong> Boil beef with onion, garlic, salt, stock cube, curry, thyme. Blend onion, bell pepper, tomatoes, scotch bonnet. Fry until oil separates. Add water, salt, stock cubes, iru. Boil 5 mins. Add chopped okra, cook 5 mins. Add liquid potash, cook 5 mins. Add beef and stock.</p>
+          <p style="margin-top: 0.5rem; line-height: 1.6;"><strong>Eba:</strong> Boil 2 cups water. Slowly sprinkle garri while stirring until thick. Cover on low heat 5 mins. Stir vigorously, cover, rest 10 mins. Shape and serve.</p>
+          <p style="margin-top: 0.8rem; font-style: italic; color: #8A6F4C;">✨ Serve warm, with the soup generously ladled over the eba.</p>
+        </details>
+        
+        <div style="background: #FDFBF8; padding: 0.8rem; margin-top: 1rem; border-left: 3px solid #C7B59B;">
+          <strong>👨🏾‍🍳 Chef's Tips:</strong> Liquid potash (akanwu) gives okro soup its signature texture. For smoother eba, stir vigorously in one direction and let it rest covered.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECIPE 3: Semo & Egusi Soup -->
+  <div class="recipe-item" style="margin-bottom: 3rem; border-bottom: 1px solid #EBE2D6; padding-bottom: 2rem;">
+    <div class="recipe-layout" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+      <div class="recipe-image" style="flex: 1; min-width: 250px;">
+        <img src="https://static.wixstatic.com/media/0a0ba1_5c0b0ebee4f8444b8cc842d3f86fdefb~mv2.jpg/v1/fill/w_736,h_382,al_c,q_80,enc_avif,quality_auto/0a0ba1_5c0b0ebee4f8444b8cc842d3f86fdefb~mv2.jpg" 
+             alt="Semo & Egusi Soup" 
+             style="width: 100%; height: 250px; border: 1px solid #E2D4C5; box-shadow: 4px 4px 0 #F5EFE7; object-fit: cover;">
+      </div>
+      <div class="recipe-content" style="flex: 2; min-width: 280px;">
+        <h2 style="border-bottom: none; margin-bottom: 0.25rem;">🍲 Semo & Egusi Soup</h2>
+        <p style="color: #8A6F4C; font-style: italic; margin-bottom: 1rem;">A classic Nigerian comfort meal — rich melon seed stew with semolina.</p>
+        <div class="recipe-meta" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">⏱️ Prep: 20 mins</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">🍲 Cook: 70 mins</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">👥 Serves: 6-8</span>
+        </div>
+        
+        <details style="margin-bottom: 0.8rem;">
+          <summary style="font-weight: 600; cursor: pointer; color: #5E4B34; padding: 0.3rem 0;">🌿 View Ingredients</summary>
+          <ul style="margin-top: 0.8rem; margin-left: 1.5rem; line-height: 1.6;">
+            <li>2 cups egusi (melon seeds, ground)</li>
+            <li>500g beef or assorted meat</li>
+            <li>1 cup smoked fish or stockfish</li>
+            <li>2 cups pumpkin leaves (ugwu) or spinach</li>
+            <li>1 onion, 2 scotch bonnet peppers</li>
+            <li>1 bell pepper, 2 tomatoes</li>
+            <li>½ cup palm oil</li>
+            <li>2 tbsp crayfish (ground)</li>
+            <li>Seasoning cubes, salt</li>
+            <li>2 cups semolina flour (for semo)</li>
+          </ul>
+        </details>
+        
+        <details style="margin-bottom: 0.8rem;">
+          <summary style="font-weight: 600; cursor: pointer; color: #5E4B34; padding: 0.3rem 0;">📖 View Method</summary>
+          <p style="margin-top: 0.8rem; line-height: 1.6;"><strong>Egusi Soup:</strong> Boil beef with salt and Maggi. Mix egusi with crayfish into paste. Fry garlic, onions in oil. Add blended peppers, fry until soft. Add beef, crayfish, daddawa, seasonings. Add fish. Scoop egusi paste, cook 7 mins, stir, cook 5 more mins. Add remaining palm oil, ugwu, water leaves, cook 5 mins.</p>
+          <p style="margin-top: 0.5rem; line-height: 1.6;"><strong>Semolina:</strong> Boil water. Mix semo with cold water into paste. Pour into boiling water, cook 5 mins (careful — it rises!). Slowly add semolina while stirring until thick. Cook 5 mins, turn off heat, let finish on hot stove.</p>
+        </details>
+        
+        <div style="background: #FDFBF8; padding: 0.8rem; margin-top: 1rem; border-left: 3px solid #C7B59B;">
+          <strong>👨🏾‍🍳 Chef's Tips:</strong> Add smoked fish for richer flavor. Adjust water for consistency. Some prefer egusi in lumps, others broken — both are delicious.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECIPE 4: Nigerian Party Jollof Rice -->
+  <div class="recipe-item" style="margin-bottom: 3rem; border-bottom: 1px solid #EBE2D6; padding-bottom: 2rem;">
+    <div class="recipe-layout" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+      <div class="recipe-image" style="flex: 1; min-width: 250px;">
+        <img src="https://static.wixstatic.com/media/11062b_4a621de380704f7c8563bcdbe48e8412~mv2.jpg/v1/fill/w_1646,h_855,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_4a621de380704f7c8563bcdbe48e8412~mv2.jpg" 
+             alt="Nigerian Party Jollof Rice" 
+             style="width: 100%; height: 250px; border: 1px solid #E2D4C5; box-shadow: 4px 4px 0 #F5EFE7; object-fit: cover;">
+      </div>
+      <div class="recipe-content" style="flex: 2; min-width: 280px;">
+        <h2 style="border-bottom: none; margin-bottom: 0.25rem;">🍚 Nigerian Party Jollof Rice</h2>
+        <p style="color: #8A6F4C; font-style: italic; margin-bottom: 1rem;">The legendary one-pot party rice — smoky, vibrant, unforgettable.</p>
+        <div class="recipe-meta" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">⏱️ Prep: 20 mins</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">🍲 Cook: 50 mins</span>
+          <span style="background: #FCFAF7; padding: 0.2rem 0.8rem; font-size: 0.85rem;">👥 Serves: 6-8</span>
+        </div>
+        
+        <details style="margin-bottom: 0.8rem;">
+          <summary style="font-weight: 600; cursor: pointer; color: #5E4B34; padding: 0.3rem 0;">🌿 View Ingredients</summary>
+          <ul style="margin-top: 0.8rem; margin-left: 1.5rem; line-height: 1.6;">
+            <li>4 cups long-grain rice (rinsed)</li>
+            <li>800g fresh tomato blend + 2 tbsp tomato paste</li>
+            <li>2 large onions (diced)</li>
+            <li>3-4 scotch bonnet peppers</li>
+            <li>½ cup vegetable oil</li>
+            <li>2 tbsp thyme, 2 tbsp curry powder</li>
+            <li>3 seasoning cubes & salt to taste</li>
+            <li>4 cups chicken stock</li>
+            <li>1 tsp garlic powder, 1 tsp ginger powder</li>
+            <li>2 bay leaves</li>
+          </ul>
+        </details>
+        
+        <details style="margin-bottom: 0.8rem;">
+          <summary style="font-weight: 600; cursor: pointer; color: #5E4B34; padding: 0.3rem 0;">📖 View Method</summary>
+          <ol style="margin-top: 0.8rem; margin-left: 1.5rem; line-height: 1.6;">
+            <li>Blend tomatoes, scotch bonnet into smooth puree. Fry in hot oil until reduced and deep red.</li>
+            <li>Add diced onions, garlic, ginger, fry 3 mins. Add tomato paste, curry, thyme, seasoning cubes.</li>
+            <li>Pour in chicken stock and bring to a boil. Add bay leaves and rinsed rice.</li>
+            <li>Cover and cook on low heat until rice absorbs liquid (~25-30 mins).</li>
+          </ol>
+          <p style="margin-top: 0.8rem; font-style: italic; color: #8A6F4C;">✨ For smoky flavor, let it burn slightly at bottom. Serve with fried plantain.</p>
+        </details>
+        
+        <div style="background: #FDFBF8; padding: 0.8rem; margin-top: 1rem; border-left: 3px solid #C7B59B;">
+          <strong>👨🏾‍🍳 Chef's Tips:</strong> Add 1 tsp Nigerian curry powder and ½ tsp white pepper for deeper warmth. Leftover Jollof fried with onions makes 'Jollof rice stir-fry' — even better the next day!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing note -->
+  <div class="floral-divider">✽ ✿ ✾</div>
+  <p style="text-align: center; color: #7F6E5B; margin: 2rem 0;">Every recipe tells a story. Which one will you cook first?</p>
+
+</div>
+
+<style>
+  details {
+    margin-bottom: 0.5rem;
+  }
+  
+  summary {
+    font-weight: 600;
+    cursor: pointer;
+    color: #5E4B34;
+    padding: 0.3rem 0;
+    transition: color 0.2s ease;
+  }
+  
+  summary:hover {
+    color: #8A6F4C;
+  }
+  
+  details[open] summary {
+    margin-bottom: 0.5rem;
+  }
+  
+  .floral-divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+    letter-spacing: 6px;
+    color: #DCCFBF;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .recipe-layout {
+      flex-direction: column !important;
+    }
+    
+    .recipe-image {
+      min-width: 100% !important;
+    }
+    
+    .recipe-image img {
+      height: 220px !important;
+    }
+    
+    .recipe-content {
+      min-width: 100% !important;
+    }
+    
+    .recipe-meta {
+      gap: 0.5rem !important;
+    }
+    
+    .recipe-meta span {
+      font-size: 0.75rem !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .recipe-image img {
+      height: 180px !important;
+    }
+  }
+</style>
+
+  <!-- JOURNAL PAGE - Main Index -->
+<div id="blog-page" class="page">
+  
+  <!-- Journal Header -->
+  <div style="background: #FCFAF7; padding: 2rem; margin-bottom: 2.5rem; border: 1px solid #EFE6DD; text-align: center;">
+    <div class="floral-divider">✽ ✿ ✾</div>
+    <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">The Reading Nook</h1>
+    <p style="font-size: 1.1rem; color: #4A3E32; max-width: 700px; margin: 0 auto;">
+      Musings on writing, faith, culture, and the stories that shape us.
+    </p>
+  </div>
+
+  <!-- Featured Post (sticky/top) -->
+  <div class="featured-post" style="margin-bottom: 3rem; background: #FFFFFF; border: 1px solid #E9E2D9; padding: 1.8rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+    <span style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #9E8262; background: #FCF8F2; padding: 0.2rem 0.8rem; display: inline-block; margin-bottom: 1rem;">✦ Featured ✦</span>
+    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem; border-bottom: none; display: block;">The Architecture of Nigerian Fantasy</h2>
+    <p style="color: #7A6852; font-size: 0.85rem; margin-bottom: 1rem;">March 15, 2025 • 8 min read</p>
+    <p style="margin-bottom: 1.2rem;">On worldbuilding in Fantah & Astral — how Nigerian folklore, landscapes, and oral traditions shape modern fantasy literature...</p>
+    <a href="#" data-post="post1" class="read-more-btn" style="display: inline-block; background: transparent; border: 1px solid #B9A788; padding: 0.5rem 1.5rem; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; transition: 0.25s;">Read Full Post →</a>
+  </div>
+
+  <!-- All Posts Grid -->
+  <h2 style="margin-bottom: 1.5rem;">✦ Recent Musings</h2>
+  
+  <div class="journal-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+    
+    <!-- Post Card 1 -->
+    <div class="post-card" style="background: white; border: 1px solid #EBE2D6; padding: 1.5rem; transition: all 0.25s ease;">
+      <div class="post-category" style="font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #9E8262; margin-bottom: 0.8rem;">Writing Craft</div>
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Finding Your Voice as a Writer</h3>
+      <p style="color: #7A6852; font-size: 0.8rem; margin-bottom: 1rem;">April 2, 2025 • 6 min read</p>
+      <p style="margin-bottom: 1.2rem; font-size: 0.95rem;">Discovering your authentic voice takes time. Here's what I've learned after publishing 7 books...</p>
+      <a href="#" data-post="post1" class="read-more-btn" style="display: inline-block; background: transparent; border: none; padding: 0; font-size: 0.85rem; font-weight: 500; color: #8A6F4C; border-bottom: 1px solid #DCCFBF;">Continue Reading →</a>
+    </div>
+    
+    <!-- Post Card 2 -->
+    <div class="post-card" style="background: white; border: 1px solid #EBE2D6; padding: 1.5rem; transition: all 0.25s ease;">
+      <div class="post-category" style="font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #9E8262; margin-bottom: 0.8rem;">Faith & Spirituality</div>
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">The Hajj Journey That Changed Me</h3>
+      <p style="color: #7A6852; font-size: 0.8rem; margin-bottom: 1rem;">March 28, 2025 • 10 min read</p>
+      <p style="margin-bottom: 1.2rem; font-size: 0.95rem;">How the pilgrimage to Mecca transformed my creative vision and became the seed for "An Epic Journey of Faith..."</p>
+      <a href="#" data-post="post2" class="read-more-btn" style="display: inline-block; background: transparent; border: none; padding: 0; font-size: 0.85rem; font-weight: 500; color: #8A6F4C; border-bottom: 1px solid #DCCFBF;">Continue Reading →</a>
+    </div>
+    
+    <!-- Post Card 3 -->
+    <div class="post-card" style="background: white; border: 1px solid #EBE2D6; padding: 1.5rem; transition: all 0.25s ease;">
+      <div class="post-category" style="font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #9E8262; margin-bottom: 0.8rem;">Poetry</div>
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Why I Write About Scars</h3>
+      <p style="color: #7A6852; font-size: 0.8rem; margin-bottom: 1rem;">March 10, 2025 • 4 min read</p>
+      <p style="margin-bottom: 1.2rem; font-size: 0.95rem;">The poem that changed everything in primary school, and why scars are reminders of battles fought...</p>
+      <a href="#" data-post="post3" class="read-more-btn" style="display: inline-block; background: transparent; border: none; padding: 0; font-size: 0.85rem; font-weight: 500; color: #8A6F4C; border-bottom: 1px solid #DCCFBF;">Continue Reading →</a>
+    </div>
+    
+    <!-- Post Card 4 -->
+    <div class="post-card" style="background: white; border: 1px solid #EBE2D6; padding: 1.5rem; transition: all 0.25s ease;">
+      <div class="post-category" style="font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #9E8262; margin-bottom: 0.8rem;">Culture & Identity</div>
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Bororo Girl to Published Author</h3>
+      <p style="color: #7A6852; font-size: 0.8rem; margin-bottom: 1rem;">February 20, 2025 • 7 min read</p>
+      <p style="margin-bottom: 1.2rem; font-size: 0.95rem;">The journey of Fantah reflects my own — navigating tradition, identity, and finding your place in the world...</p>
+      <a href="#" data-post="post4" class="read-more-btn" style="display: inline-block; background: transparent; border: none; padding: 0; font-size: 0.85rem; font-weight: 500; color: #8A6F4C; border-bottom: 1px solid #DCCFBF;">Continue Reading →</a>
+    </div>
+    
+    <!-- Post Card 5 -->
+    <div class="post-card" style="background: white; border: 1px solid #EBE2D6; padding: 1.5rem; transition: all 0.25s ease;">
+      <div class="post-category" style="font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #9E8262; margin-bottom: 0.8rem;">Behind the Books</div>
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">The Making of the Astral Series</h3>
+      <p style="color: #7A6852; font-size: 0.8rem; margin-bottom: 1rem;">February 5, 2025 • 9 min read</p>
+      <p style="margin-bottom: 1.2rem; font-size: 0.95rem;">From concept to completion — how Yusuf's journey through dimensions came to life...</p>
+      <a href="#" data-post="post5" class="read-more-btn" style="display: inline-block; background: transparent; border: none; padding: 0; font-size: 0.85rem; font-weight: 500; color: #8A6F4C; border-bottom: 1px solid #DCCFBF;">Continue Reading →</a>
+    </div>
+    
+  </div>
+  
+  <!-- Newsletter Signup -->
+  <div style="background: #FDFAF5; border: 1px solid #E5D9CD; padding: 2rem; text-align: center; margin-top: 2rem;">
+    <span class="floral-icon">✉️</span>
+    <h3 style="margin: 0.5rem 0;">Never miss a post</h3>
+    <p style="color: #5D6D7E; margin-bottom: 1rem;">Join the reading circle — new letters delivered to your inbox.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center;">
+      <input type="email" placeholder="Your email address" style="padding: 0.7rem 1rem; border: 1px solid #D4C0A8; background: white; min-width: 250px;">
+      <button class="btn" style="background: #FFFFFF;">Subscribe</button>
+    </div>
+  </div>
+  
+</div>
+
+<!-- POST 1 TEMPLATE - The Architecture of Nigerian Fantasy -->
+<div id="post1-page" class="page" style="display: none;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <a href="#" data-page="blog" class="back-to-blog" style="display: inline-block; margin-bottom: 2rem; color: #8A6F4C;">← Back to Journal</a>
+    
+    <div style="background: #FCFAF7; padding: 2rem; margin-bottom: 2rem; border: 1px solid #EFE6DD;">
+      <div class="floral-divider" style="text-align: left;">✽ ✿ ✾</div>
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">The Architecture of Nigerian Fantasy</h1>
+      <p style="color: #7A6852; margin-bottom: 1rem;">March 15, 2025 • 8 min read</p>
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Writing Craft</span>
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Fantasy</span>
+      </div>
+    </div>
+    
+    <div style="background: white; border: 1px solid #EBE2D6; padding: 2rem;">
+      <p>When I wrote <em>Fantah</em>, I didn't set out to create a fantasy novel. I set out to tell a story about a Bororo girl finding her place in the world. But as the characters grew, so did the world around them — and I realized I was building something entirely new.</p>
+      
+      <h3 style="margin: 1.5rem 0 0.8rem;">The Foundation: Oral Traditions</h3>
+      <p>Growing up in Northern Nigeria, I was surrounded by stories told under moonlight. My grandmother would weave tales of spirits in the baobab trees, of heroes who crossed rivers on the backs of crocodiles, of love that spanned villages and centuries. These weren't just bedtime stories — they were my first encounter with worldbuilding.</p>
+      
+      <h3 style="margin: 1.5rem 0 0.8rem;">Bridging Worlds</h3>
+      <p>In <em>Fantah</em> and the <em>Astral Series</em>, I wanted to honor those oral traditions while creating something accessible to global readers. The kingdoms in Fantah are inspired by real Nigerian landscapes — the rolling hills of Zuma Rock, the ancient city of Kano, the mystical forests of the Niger Delta.</p>
+      
+      <div class="testimonial" style="margin: 2rem 0;">
+        <p>“Fantah transported me to another world. Bagudu's storytelling is rich, immersive, and utterly unforgettable.” — Goodreads Reviewer</p>
+      </div>
+      
+      <h3 style="margin: 1.5rem 0 0.8rem;">What's Next for Nigerian Fantasy</h3>
+      <p>I believe we're at the beginning of a renaissance in African fantasy literature. Writers like Nnedi Okorafor, Tomi Adeyemi, and others have opened doors. My hope is that Fantah and the Astral series add another brick to that beautiful architecture.</p>
+      
+      <p style="margin-top: 2rem; font-style: italic;">What stories from your childhood would you like to see reimagined as fantasy? Share with me in the comments below or on social media.</p>
+    </div>
+    
+    <div style="margin-top: 2rem; padding: 1rem; border-top: 1px solid #EBE2D6; display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <a href="#" data-post="post2" class="next-post" style="color: #8A6F4C;">← Previous: The Hajj Journey That Changed Me</a>
+      <a href="#" data-post="post3" class="next-post" style="color: #8A6F4C;">Next: Why I Write About Scars →</a>
+    </div>
+  </div>
+</div>
+
+<!-- POST 2 TEMPLATE - The Hajj Journey That Changed Me -->
+<div id="post2-page" class="page" style="display: none;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <a href="#" data-page="blog" class="back-to-blog" style="display: inline-block; margin-bottom: 2rem; color: #8A6F4C;">← Back to Journal</a>
+    
+    <div style="background: #FCFAF7; padding: 2rem; margin-bottom: 2rem; border: 1px solid #EFE6DD;">
+      <div class="floral-divider" style="text-align: left;">✽ ✿ ✾</div>
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">The Hajj Journey That Changed Me</h1>
+      <p style="color: #7A6852; margin-bottom: 1rem;">March 28, 2025 • 10 min read</p>
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Faith & Spirituality</span>
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Memoir</span>
+      </div>
+    </div>
+    
+    <div style="background: white; border: 1px solid #EBE2D6; padding: 2rem;">
+      <p>In 2019, I stood on the plains of Arafat surrounded by millions of souls from every corner of the earth. We spoke different languages, wore different clothes, carried different stories — but in that moment, we were the same. We were pilgrims seeking closeness to the Divine.</p>
+      
+      <p>That journey became the seed for <em>“An Epic Journey of Faith.”</em> But more than a book, it became a lens through which I now see all my writing.</p>
+      
+      <h3 style="margin: 1.5rem 0 0.8rem;">The Power of Shared Sacred Space</h3>
+      <p>The Hajj taught me that the most powerful stories are those that remind us of our shared humanity. When I write — whether it's a poem about love or a novel about a prince seeking redemption — I'm always trying to create sacred space on the page.</p>
+      
+      <div class="testimonial" style="margin: 2rem 0;">
+        <p>“An Extraordinary Experience is exactly that. A faith-filled journey that touched my heart.” — Amazon Customer</p>
+      </div>
+      
+      <p style="margin-top: 2rem; font-style: italic;">Have you ever had a journey — physical or spiritual — that changed your perspective? I'd love to hear about it.</p>
+    </div>
+    
+    <div style="margin-top: 2rem; padding: 1rem; border-top: 1px solid #EBE2D6; display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <a href="#" data-post="post1" class="next-post" style="color: #8A6F4C;">← Previous: Architecture of Nigerian Fantasy</a>
+      <a href="#" data-post="post3" class="next-post" style="color: #8A6F4C;">Next: Why I Write About Scars →</a>
+    </div>
+  </div>
+</div>
+
+<!-- POST 3 TEMPLATE - Why I Write About Scars -->
+<div id="post3-page" class="page" style="display: none;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <a href="#" data-page="blog" class="back-to-blog" style="display: inline-block; margin-bottom: 2rem; color: #8A6F4C;">← Back to Journal</a>
+    
+    <div style="background: #FCFAF7; padding: 2rem; margin-bottom: 2rem; border: 1px solid #EFE6DD;">
+      <div class="floral-divider" style="text-align: left;">✽ ✿ ✾</div>
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Why I Write About Scars</h1>
+      <p style="color: #7A6852; margin-bottom: 1rem;">March 10, 2025 • 4 min read</p>
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Poetry</span>
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Inspiration</span>
+      </div>
+    </div>
+    
+    <div style="background: white; border: 1px solid #EBE2D6; padding: 2rem;">
+      <p>In my early years, at primary school in the 1980s, I stumbled upon an amazing poem about scars. Our teacher, bless her heart, explained how scars aren't just physical marks but reminders of the battles we've fought.</p>
+      
+      <p>That lesson stuck with me. It inspired me to write two poetry collections and four novels. Because every character I create — Fantah, Hayah, Melody, Yusuf — carries scars. Not just the kind you can see, but the invisible ones we all bear.</p>
+      
+      <h3 style="margin: 1.5rem 0 0.8rem;">Scars as Story</h3>
+      <p>When I wrote <em>Ripples</em>, I thought about how every scar tells a story of survival. The collection became a meditation on becoming — moving from water to fire to simply being here.</p>
+      
+      <div class="testimonial" style="margin: 2rem 0;">
+        <p>“Ripples is a soul-stirring collection where each poem casts a stone into the still waters of memory.”</p>
+      </div>
+      
+      <p style="margin-top: 2rem; font-style: italic;">What's a scar — physical or emotional — that has shaped your story?</p>
+    </div>
+    
+    <div style="margin-top: 2rem; padding: 1rem; border-top: 1px solid #EBE2D6; display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <a href="#" data-post="post2" class="next-post" style="color: #8A6F4C;">← Previous: The Hajj Journey</a>
+      <a href="#" data-post="post4" class="next-post" style="color: #8A6F4C;">Next: Bororo Girl to Published Author →</a>
+    </div>
+  </div>
+</div>
+
+<!-- POST 4 TEMPLATE - Bororo Girl to Published Author -->
+<div id="post4-page" class="page" style="display: none;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <a href="#" data-page="blog" class="back-to-blog" style="display: inline-block; margin-bottom: 2rem; color: #8A6F4C;">← Back to Journal</a>
+    
+    <div style="background: #FCFAF7; padding: 2rem; margin-bottom: 2rem; border: 1px solid #EFE6DD;">
+      <div class="floral-divider" style="text-align: left;">✽ ✿ ✾</div>
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Bororo Girl to Published Author</h1>
+      <p style="color: #7A6852; margin-bottom: 1rem;">February 20, 2025 • 7 min read</p>
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Culture & Identity</span>
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Memoir</span>
+      </div>
+    </div>
+    
+    <div style="background: white; border: 1px solid #EBE2D6; padding: 2rem;">
+      <p>Fantah, the determined Bororo girl at the heart of my novel, shares more with me than readers might realize. Her journey — from the grasslands of Northern Nigeria to discovering her place in a complex world — mirrors my own.</p>
+      
+      <p>Like Fantah, I grew up surrounded by traditions that felt both anchoring and limiting. I learned early that being a girl meant certain expectations. But I also learned, from the strong women around me, that expectations could be rewritten.</p>
+      
+      <h3 style="margin: 1.5rem 0 0.8rem;">Finding My Voice in Multiple Languages</h3>
+      <p>Today, I speak 3 languages fluently: English, Hausa, and Fulfulde. I can also read and write Arabic. Each language carries a different part of my identity. When I write, I'm not just choosing English because it's accessible — I'm translating entire worlds between the languages that shaped me.</p>
+      
+      <div class="testimonial" style="margin: 2rem 0;">
+        <p>“The compelling journey of Fantah takes readers on an unforgettable expedition through diverse landscapes and intriguing kingdoms.”</p>
+      </div>
+      
+      <p style="margin-top: 2rem; font-style: italic;">To every young girl from a small town with big dreams: your voice matters. Keep writing. Keep becoming.</p>
+    </div>
+    
+    <div style="margin-top: 2rem; padding: 1rem; border-top: 1px solid #EBE2D6; display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <a href="#" data-post="post3" class="next-post" style="color: #8A6F4C;">← Previous: Why I Write About Scars</a>
+      <a href="#" data-post="post5" class="next-post" style="color: #8A6F4C;">Next: The Making of the Astral Series →</a>
+    </div>
+  </div>
+</div>
+
+<!-- POST 5 TEMPLATE - The Making of the Astral Series -->
+<div id="post5-page" class="page" style="display: none;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <a href="#" data-page="blog" class="back-to-blog" style="display: inline-block; margin-bottom: 2rem; color: #8A6F4C;">← Back to Journal</a>
+    
+    <div style="background: #FCFAF7; padding: 2rem; margin-bottom: 2rem; border: 1px solid #EFE6DD;">
+      <div class="floral-divider" style="text-align: left;">✽ ✿ ✾</div>
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">The Making of the Astral Series</h1>
+      <p style="color: #7A6852; margin-bottom: 1rem;">February 5, 2025 • 9 min read</p>
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Behind the Books</span>
+        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Fantasy</span>
+      </div>
+    </div>
+    
+    <div style="background: white; border: 1px solid #EBE2D6; padding: 2rem;">
+      <p>Yusuf's story began with a question: What if the space between sleep and wakefulness was actually a doorway?</p>
+      
+      <p>I've always been fascinated by dreams — the way they can feel more real than waking life. In many Nigerian traditions, dreams are considered portals, messages from ancestors or glimpses into other dimensions. The Astral Series became my way of exploring that belief.</p>
+      
+      <h3 style="margin: 1.5rem 0 0.8rem;">From Concept to Completion</h3>
+      <p>Writing the Astral Series took me three years. I researched astral projection, traveled to learn from traditional spiritual guides, and spent countless nights journaling my own dreams. Yusuf's journey became my journey.</p>
+      
+      <div class="highlight" style="margin: 2rem 0;">
+        <p>“Embark on a cosmic odyssey where boundaries between worlds dissolve. Join Yusuf as he discovers the ancient art of astral projection and unlocks the secrets of inter-dimensional travel.”</p>
+      </div>
+      
+      <p style="margin-top: 2rem; font-style: italic;">The Astral Series: Book One is available now. Have you ever had a dream that felt like a doorway to another world?</p>
+    </div>
+    
+    <div style="margin-top: 2rem; padding: 1rem; border-top: 1px solid #EBE2D6; display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <a href="#" data-post="post4" class="next-post" style="color: #8A6F4C;">← Previous: Bororo Girl to Published Author</a>
+      <a href="#" data-post="post1" class="next-post" style="color: #8A6F4C;">Next: Architecture of Nigerian Fantasy →</a>
+    </div>
+  </div>
+</div>
+<!-- POETRY PAGE -->
+<div id="poetry-page" class="page">
+  <div class="poetry-hero">
+    <div class="poetry-bg-side"></div>
+    <div class="poetry-list-side">
+      <h2>✦ Recent Poems</h2>
+      <div class="poem-item">
+        <a href="https://hadizab.github.io/ripples-/" target="_blank">Ripples</a>
+        <div class="poem-note">A meditation on becoming — water, fire, and the space between.</div>
+      </div>
+      <div class="poem-item">
+        <a href="https://hadizab.github.io/quietparts/" target="_blank">Quiet Parts</a>
+        <div class="poem-note">Exploring faith, love, friendship, and new beginnings.</div>
+      </div>
+      <div class="poem-item">
+        <a href="https://hadizab.github.io/withlove/" target="_blank">With Love</a>
+        <div class="poem-note">Short and sweet poems about love, life, happiness, and faith.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+
+
+
+<!-- Footer -->
+<footer id="contact">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Hadiza Bagudu</h3>
+            <p style="color: rgba(255,255,255,0.8); line-height: 1.6;">
+                Author, poet, and storyteller creating narratives that bridge cultures and touch hearts.
+            </p>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
+                <li><a href="#" onclick="showPage('about'); return false;">About</a></li>
+                <li><a href="#" onclick="showPage('books'); return false;">Books</a></li>
+                <li><a href="#" onclick="showPage('blog'); return false;">Blog</a></li>
+                <li><a href="#" onclick="showPage('poetry'); return false;">Poetry</a></li>
             </ul>
-            <div class="mobile-menu" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-container">
-            <div class="hero-content">
-                <p class="hero-subtitle">Award-Winning Author</p>
-                <h1 class="hero-title">Stories that <span>linger</span> in the mind</h1>
-                <p class="hero-description">Exploring the depths of human connection through contemporary fiction. New York Times bestselling author of "The Silent Hours" and "Winter's Edge."</p>
-                <div class="cta-buttons">
-                    <a href="#books" class="btn btn-primary">View Books</a>
-                    <a href="#gallery" class="btn btn-secondary">View Gallery</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="image-frame"></div>
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=1000&fit=crop" alt="Elena Whitmore">
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section - Image Slider -->
-    <section class="gallery" id="gallery">
-        <div class="section-header fade-in">
-            <p class="section-tag">Visual Inspiration</p>
-            <h2 class="section-title">Moments of Beauty</h2>
         </div>
         
-        <div class="gallery-container">
-            <div class="slider-wrapper fade-in">
-                <div class="slider-container" id="sliderContainer">
-                    <img class="active" src="https://cdn.pixabay.com/photo/2014/04/14/20/11/pink-324175_640.jpg" alt="Pink flowers in bloom">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510_640.jpg" alt="White daisy flower">
-                    <img src="https://cdn.pixabay.com/photo/2013/07/21/13/00/rose-165819_640.jpg" alt="Red rose close-up">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/rose-729509_640.jpg" alt="Pink rose petals">
-                    <img src="https://cdn.pixabay.com/photo/2012/03/01/00/55/flowers-19830_640.jpg" alt="Colorful flower arrangement">
-                    <img src="https://cdn.pixabay.com/photo/2016/02/17/19/08/lotus-1205631_640.jpg" alt="Lotus flower">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_640.jpg" alt="Purple spring flowers">
-                </div>
-                
-                <div class="slider-controls">
-                    <button onclick="previousSlide()" aria-label="Previous image">←</button>
-                    <div class="slider-dots" id="sliderDots"></div>
-                    <button onclick="nextSlide()" aria-label="Next image">→</button>
-                </div>
-                
-                <div class="slide-counter">
-                    <span id="currentSlide">1</span> / <span id="totalSlides">7</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Books Section -->
-    <section class="books" id="books">
-        <div class="section-header fade-in">
-            <p class="section-tag">Published Works</p>
-            <h2 class="section-title">Complete Bibliography</h2>
+        <div class="footer-section">
+            <h3>Legal</h3>
+            <ul>
+                <li><a href="#" onclick="showPrivacyPolicy(); return false;">Privacy Policy</a></li>
+                <li><a href="#" onclick="showTermsConditions(); return false;">Terms & Conditions</a></li>
+            </ul>
         </div>
         
-        <div class="books-grid" id="booksGrid">
-            <!-- Featured Books (Always Visible) -->
-            <div class="book-card fade-in">
-                <div class="book-cover">The Silent Hours</div>
-                <p class="book-year">2024</p>
-                <h3 class="book-title">The Silent Hours</h3>
-                <p class="book-genre">Literary Fiction</p>
-                <p class="book-description">A haunting exploration of memory and loss set against the backdrop of a coastal town in Maine. Winner of the National Book Award.</p>
-                <div class="book-links">
-                    <a href="#" class="read-link">Read Now</a>
-                    <a href="#" class="read-link">Amazon</a>
-                    <a href="#" class="read-link">Audible</a>
-                </div>
-            </div>
+      <div class="footer-section">
+    <h3>Contact</h3>
+    <ul>
+        <li>Abuja, Nigeria</li>
+        <li><strong>PUBLISHER:</strong> ABAI Productions Limited</li>
+        <li>Suit 003/050, Parks and Gardens, Opp. Nitel Office, Suleja</li>
+        <li>Tel: 08050783334, 09020454443</li>
+        <li>Email: <a href="#" onclick="openReviewPopup(); return false;">Send a message</a></li>
+    </ul>
+</div>
+    
+  <div class="footer-bottom">
+        <p>© 2024 Hadiza Bagudu. All rights reserved. | Designed with ❤️ for storytellers</p>
+    </div>
+      
+     <!-- POETRY PAGE -->
+<div id="poetry-page" class="page">
+  <div class="poetry-hero">
+    <div class="poetry-bg-side"></div>
+    <div class="poetry-list-side">
+      <h2>✦ Recent Poems</h2>
+      <div class="poem-item">
+        <a href="https://hadizab.github.io/ripples-/" target="_blank">Ripples</a>
+        <div class="poem-note">A meditation on becoming — water, fire, and the space between.</div>
+      </div>
+      <div class="poem-item">
+        <a href="https://hadizab.github.io/quietparts/" target="_blank">Quiet Parts</a>
+        <div class="poem-note">Exploring faith, love, friendship, and new beginnings.</div>
+      </div>
+      <div class="poem-item">
+        <a href="https://hadizab.github.io/withlove/" target="_blank">With Love</a>
+        <div class="poem-note">Short and sweet poems about love, life, happiness, and faith.</div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+</footer>
 
-            <div class="book-card fade-in">
-                <div class="book-cover">Winter's Edge</div>
-                <p class="book-year">2022</p>
-                <h3 class="book-title">Winter's Edge</h3>
-                <p class="book-genre">Contemporary Fiction</p>
-                <p class="book-description">Three strangers bound by a single winter storm discover that survival means more than enduring the cold.</p>
-                <div class="book-links">
-                    <a href="#" class="read-link">Read Now</a>
-                    <a href="#" class="read-link">Kindle</a>
-                    <a href="#" class="read-link">Goodreads</a>
-                </div>
-            </div>
-
-            <div class="book-card fade-in">
-                <div class="book-cover">Paper Boats</div>
-                <p class="book-year">2020</p>
-                <h3 class="book-title">Paper Boats</h3>
-                <p class="book-genre">Short Stories</p>
-                <p class="book-description">A collection of interconnected stories about childhood, distance, and the art of letting go.</p>
-                <div class="book-links">
-                    <a href="#" class="read-link">Read Now</a>
-                    <a href="#" class="read-link">Barnes & Noble</a>
-                </div>
-            </div>
-
-            <!-- Hidden Books (Collapsible) -->
-            <div class="hidden-books" id="hiddenBooks">
-                <div class="book-card">
-                    <div class="book-cover">The Light Between</div>
-                    <p class="book-year">2018</p>
-                    <h3 class="book-title">The Light Between</h3>
-                    <p class="book-genre">Historical Fiction</p>
-                    <p class="book-description">A sweeping tale of love and war spanning three decades, from the beaches of Normandy to the streets of Paris.</p>
-                    <div class="book-links">
-                        <a href="#" class="read-link">Read Now</a>
-                        <a href="#" class="read-link">Amazon</a>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-cover">Echoes of You</div>
-                    <p class="book-year">2016</p>
-                    <h3 class="book-title">Echoes of You</h3>
-                    <p class="book-genre">Romance</p>
-                    <p class="book-description">A poignant love story about two people finding each other across time and circumstance.</p>
-                    <div class="book-links">
-                        <a href="#" class="read-link">Read Now</a>
-                        <a href="#" class="read-link">Kindle Unlimited</a>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-cover">The Glass House</div>
-                    <p class="book-year">2014</p>
-                    <h3 class="book-title">The Glass House</h3>
-                    <p class="book-genre">Mystery</p>
-                    <p class="book-description">A gripping psychological thriller set in an isolated mansion where nothing is as it seems.</p>
-                    <div class="book-links">
-                        <a href="#" class="read-link">Read Now</a>
-                        <a href="#" class="read-link">Audible</a>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-cover">Summer's End</div>
-                    <p class="book-year">2012</p>
-                    <h3 class="book-title">Summer's End</h3>
-                    <p class="book-genre">Coming of Age</p>
-                    <p class="book-description">The summer that changed everything— a nostalgic journey through the last days of innocence.</p>
-                    <div class="book-links">
-                        <a href="#" class="read-link">Read Now</a>
-                        <a href="#" class="read-link">Paperback</a>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-cover">Midnight Letters</div>
-                    <p class="book-year">2010</p>
-                    <h3 class="book-title">Midnight Letters</h3>
-                    <p class="book-genre">Epistolary Fiction</p>
-                    <p class="book-description">A novel told entirely through letters exchanged between two pen pals over twenty years.</p>
-                    <div class="book-links">
-                        <a href="#" class="read-link">Read Now</a>
-                        <a href="#" class="read-link">Special Edition</a>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-cover">The First Snow</div>
-                    <p class="book-year">2008</p>
-                    <h3 class="book-title">The First Snow</h3>
-                    <p class="book-genre">Literary Fiction</p>
-                    <p class="book-description">Debut novel about family secrets revealed during a record-breaking winter in Vermont.</p>
-                    <div class="book-links">
-                        <a href="#" class="read-link">Read Now</a>
-                        <a href="#" class="read-link">Anniversary Edition</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="expand-btn">
-                <button class="btn btn-secondary" id="toggleBooks" onclick="toggleBooks()">
-                    <span id="booksBtnText">View Complete Library</span>
-                    <span id="booksBtnIcon">↓</span>
-                </button>
-            </div>
+<script>
+    // ==================== REVIEW POPUP FUNCTION (FIXED) ====================
+// This opens your Leave a Review page in a popup
+window.openReviewPopup = function() {
+    console.log("Opening Leave a Review page...");
+    
+    // Create modal overlay
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.85)';
+    modal.style.zIndex = '10000';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.overflowY = 'auto';
+    modal.style.padding = '2rem';
+    
+    // Create modal content with iframe to your Leave a Review page
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 20px; max-width: 900px; width: 100%; max-height: 90vh; position: relative; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
+            <button onclick="document.querySelector('div[style*=\\\"z-index: 10000\\\"]').remove()" style="position: absolute; top: 15px; right: 20px; background: #d4a373; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; color: white; z-index: 10001; display: flex; align-items: center; justify-content: center;">&times;</button>
+            <iframe src="https://hadizab.github.io/Leave-a-Review/" style="width: 100%; height: 85vh; border: none; display: block;"></iframe>
         </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="blog" id="blog">
-        <div class="section-header fade-in">
-            <p class="section-tag">From the Desk</p>
-            <h2 class="section-title">Latest Essays & Updates</h2>
-        </div>
-
-        <div class="blog-grid">
-            <article class="blog-card fade-in" onclick="openBlogPost(1)">
-                <div class="blog-meta">
-                    <span class="blog-category">Writing Life</span>
-                    <span>February 15, 2024</span>
-                    <span>5 min read</span>
-                </div>
-                <h3 class="blog-title">The Art of Listening to Silence</h3>
-                <p class="blog-excerpt">In the spaces between words, between breaths, between heartbeats—this is where the real story lives. I've spent the last decade learning to hear what isn't said...</p>
-                <a href="#" class="read-more" onclick="event.stopPropagation()">Read Article →</a>
-            </article>
-
-            <article class="blog-card fade-in" onclick="openBlogPost(2)">
-                <div class="blog-meta">
-                    <span class="blog-category">Behind the Book</span>
-                    <span>January 28, 2024</span>
-                    <span>8 min read</span>
-                </div>
-                <h3 class="blog-title">Researching "The Silent Hours": A Journey to Coastal Maine</h3>
-                <p class="blog-excerpt">The fog was so thick I couldn't see the end of the dock. Standing there, I knew I had found the setting for my next novel. Here's how three months in a fishing village shaped the book...</p>
-                <a href="#" class="read-more" onclick="event.stopPropagation()">Read Article →</a>
-            </article>
-
-            <article class="blog-card fade-in" onclick="openBlogPost(3)">
-                <div class="blog-meta">
-                    <span class="blog-category">Reading Recommendations</span>
-                    <span>January 10, 2024</span>
-                    <span>4 min read</span>
-                </div>
-                <h3 class="blog-title">Five Books That Taught Me How to Write About Grief</h3>
-                <p class="blog-excerpt">Grief is the price we pay for love, and writing about it requires a delicate touch. These five authors showed me the way through their masterful prose...</p>
-                <a href="#" class="read-more" onclick="event.stopPropagation()">Read Article →</a>
-            </article>
-
-            <article class="blog-card fade-in" onclick="openBlogPost(4)">
-                <div class="blog-meta">
-                    <span class="blog-category">Publishing</span>
-                    <span>December 22, 2023</span>
-                    <span>6 min read</span>
-                </div>
-                <h3 class="blog-title">From Rejection to Recognition: My 15-Year Overnight Success</h3>
-                <p class="blog-excerpt">The drawer in my desk still holds 147 rejection letters. Each one taught me something different about resilience, craft, and the business of books...</p>
-                <a href="#" class="read-more" onclick="event.stopPropagation()">Read Article →</a>
-            </article>
-
-            <article class="blog-card fade-in" onclick="openBlogPost(5)">
-                <div class="blog-meta">
-                    <span class="blog-category">Craft</span>
-                    <span>December 5, 2023</span>
-                    <span>7 min read</span>
-                </div>
-                <h3 class="blog-title">Why I Write Longhand (And You Should Too)</h3>
-                <p class="blog-excerpt">There's something about the friction of pen on paper that slows down the mind just enough to catch the thoughts worth keeping. My fountain pen collection has grown to 43...</p>
-                <a href="#" class="read-more" onclick="event.stopPropagation()">Read Article →</a>
-            </article>
-        </div>
-
-        <div class="text-center mt-2 fade-in">
-            <a href="#" class="btn btn-secondary">View All Posts</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-container">
-            <div class="about-image fade-in">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop" alt="Elena Whitmore writing">
-            </div>
-            <div class="about-content fade-in">
-                <p class="section-tag">About the Author</p>
-                <h3>Writing is an act of <em>listening</em> to the silence between words</h3>
-                
-                <p class="about-intro">Elena Whitmore is the New York Times bestselling author of twelve novels, including the National Book Award winner "The Silent Hours." Her work has been translated into twenty languages and adapted for both film and television.</p>
-                
-                <p>She grew up in the Pacific Northwest, surrounded by tall pines and persistent rain. It was here, in the quiet moments between storms, that she discovered her love for storytelling. She currently divides her time between New York City and a small cottage in coastal Maine.</p>
-
-                <button class="expand-btn-bio" id="bioToggle" onclick="toggleBio()" aria-expanded="false">
-                    <span>Read Full Biography</span>
-                    <span class="expand-icon">↓</span>
-                </button>
-
-                <div class="expandable-content" id="expandableBio">
-                    <div class="bio-section">
-                        <h4>Early Life & Education</h4>
-                        <p>Born in 1978 in Portland, Oregon, Elena was the youngest of four children. Her mother was a librarian who instilled in her a love of books from an early age. She spent her childhood reading everything from Austen to Zola, often hiding in the library stacks during recess.</p>
-                        <p>She attended Reed College, where she studied English Literature and Creative Writing, graduating summa cum laude in 2000. Her undergraduate thesis, a collection of short stories, won the college's prestigious fiction prize.</p>
-                    </div>
-
-                    <div class="bio-section">
-                        <h4>Career Beginnings</h4>
-                        <p>After college, Elena moved to New York City with $400 in her pocket and a manuscript in her backpack. She worked as a barista, a bookstore clerk, and a copy editor while writing in the early morning hours. Her first novel, "The First Snow," was rejected by 47 agents before finding a home with a small independent press.</p>
-                        <p>That debut novel, published in 2008, sold only 3,000 copies in its first year. But a glowing review in the New York Times Book Review changed everything. Within months, it was optioned for film and went into its fifth printing.</p>
-                    </div>
-
-                    <div class="bio-section">
-                        <h4>Literary Success</h4>
-                        <p>Her breakthrough came with "The Light Between" (2018), which spent 32 weeks on the New York Times bestseller list and was selected for Oprah's Book Club. The novel has sold over two million copies worldwide.</p>
-                        <p>"The Silent Hours" (2024) marked her arrival as a major literary voice, winning the National Book Award for Fiction and the Pulitzer Prize for Fiction. The novel is currently being adapted into a limited series starring Frances McDormand.</p>
-                    </div>
-
-                    <div class="bio-section">
-                        <h4>Teaching & Mentorship</h4>
-                        <p>Since 2015, Elena has taught creative writing at Columbia University School of the Arts, where she holds the position of Distinguished Writer-in-Residence. She is known for her intensive workshops on character development and narrative structure.</p>
-                        <p>She also runs a scholarship program for emerging writers from underrepresented backgrounds, providing full funding for MFA candidates at three universities.</p>
-                    </div>
-
-                    <div class="bio-section">
-                        <h4>Personal Life</h4>
-                        <p>Elena lives in Brooklyn Heights with her partner, photographer Sarah Chen, and their two rescue dogs, Virginia and Leonard. She is an avid collector of vintage typewriters and first edition books.</p>
-                        <p>When not writing, she practices yoga, experiments with sourdough baking, and walks the Brooklyn Bridge at dawn. She is currently at work on her thirteenth novel, set in 1960s Sicily.</p>
-                    </div>
-
-                    <div class="bio-section">
-                        <h4>Awards & Recognition</h4>
-                        <ul class="bio-list">
-                            <li>Pulitzer Prize for Fiction (2024) - "The Silent Hours"</li>
-                            <li>National Book Award for Fiction (2024) - "The Silent Hours"</li>
-                            <li>PEN/Faulkner Award (2019) - "The Light Between"</li>
-                            <li>Women's Prize for Fiction, Shortlist (2019)</li>
-                            <li>American Academy of Arts and Letters, Inductee (2020)</li>
-                            <li>Guggenheim Fellowship (2016)</li>
-                            <li>National Endowment for the Arts Fellowship (2012)</li>
-                            <li>Whiting Award (2010)</li>
-                        </ul>
-                    </div>
-
-                    <div class="bio-section">
-                        <h4>Media & Adaptations</h4>
-                        <p>Her work has been adapted for film and television multiple times. "Winter's Edge" became a critically acclaimed HBO miniseries starring Jessica Chastain. "The Glass House" is currently in development with A24 Films.</p>
-                        <p>Elena has appeared on NPR's Fresh Air, The Late Show with Stephen Colbert, and has been profiled in The New Yorker, Vanity Fair, and Vogue.</p>
-                    </div>
-                </div>
-
-                <div class="stats">
-                    <div class="stat-item">
-                        <h4>12</h4>
-                        <p>Novels Published</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4>8</h4>
-                        <p>Major Literary Awards</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4>20+</h4>
-                        <p>Languages Translated</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="contact-container">
-            <p class="section-tag fade-in">Get in Touch</p>
-            <h2 class="section-title fade-in">Let's Connect</h2>
-            <p style="color: var(--medium-grey); margin-top: 1rem;" class="fade-in">For inquiries, speaking engagements, or just to say hello</p>
-            
-            <!-- Formspree Form - Sends to mammy546@gmail.com -->
-            <form 
-                class="contact-form fade-in" 
-                action="https://formspree.io/f/YOUR_FORM_ID" 
-                method="POST"
-                id="contactForm"
-            >
-                <!-- Redirect back to site after submission -->
-                <input type="hidden" name="_next" value="https://yourusername.github.io/thanks.html">
-                
-                <!-- Subject line for the email -->
-                <input type="hidden" name="_subject" value="New message from Elena Whitmore website">
-                
-                <!-- Honeypot to prevent spam -->
-                <input type="text" name="_gotcha" style="display:none">
-                
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your name">
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required placeholder="What's this about?">
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
-                
-                <div id="formStatus" class="form-status"></div>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
-                <a href="#">Goodreads</a>
-                <a href="#">Newsletter</a>
-                <a href="#">RSS</a>
-            </div>
-            <p class="copyright">&copy; 2024 Elena Whitmore. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Image Slider Functionality
-        var slides = document.querySelectorAll('.slider-container img');
-        var currentSlide = 0;
-        var slideInterval;
-        
-        // Initialize dots
-        function initDots() {
-            var dotsContainer = document.getElementById('sliderDots');
-            slides.forEach((_, index) => {
-                var dot = document.createElement('span');
-                dot.className = 'dot' + (index === 0 ? ' active' : '');
-                dot.onclick = () => goToSlide(index);
-                dotsContainer.appendChild(dot);
-            });
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close modal when clicking outside the white box
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
         }
+    });
+};
+    // This opens the Leave a Review page in a popup - ONLY when clicked
+    window.openReviewPopup = function() {
+        console.log("Opening review popup...");
         
-        function updateDots() {
-            var dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-            document.getElementById('currentSlide').textContent = currentSlide + 1;
-        }
+        // Create modal overlay
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0,0,0,0.85)';
+        modal.style.zIndex = '10000';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.overflowY = 'auto';
+        modal.style.padding = '2rem';
         
-        function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            
-            if (n < 0) {
-                currentSlide = slides.length - 1;
-            } else if (n >= slides.length) {
-                currentSlide = 0;
-            } else {
-                currentSlide = n;
-            }
-            
-            slides[currentSlide].classList.add('active');
-            updateDots();
-        }
+        // Create modal content with iframe
+        modal.innerHTML = `
+            <div style="background: white; border-radius: 20px; max-width: 900px; width: 100%; max-height: 90vh; position: relative; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
+                <button onclick="document.querySelector('div[style*=\\\"z-index: 10000\\\"]').remove()" style="position: absolute; top: 15px; right: 20px; background: #d4a373; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; color: white; z-index: 10001; display: flex; align-items: center; justify-content: center;">&times;</button>
+                <iframe src="https://hadizab.github.io/Leave-a-Review/" style="width: 100%; height: 85vh; border: none; display: block;"></iframe>
+            </div>
+        `;
         
-        function previousSlide() {
-            showSlide(currentSlide - 1);
-            resetInterval();
-        }
+        document.body.appendChild(modal);
         
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-            resetInterval();
-        }
-        
-        function goToSlide(n) {
-            showSlide(n);
-            resetInterval();
-        }
-        
-        function startInterval() {
-            slideInterval = setInterval(() => {
-                showSlide(currentSlide + 1);
-            }, 5000);
-        }
-        
-        function resetInterval() {
-            clearInterval(slideInterval);
-            startInterval();
-        }
-        
-        // Initialize slider
-        initDots();
-        document.getElementById('totalSlides').textContent = slides.length;
-        startInterval();
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        // Close modal when clicking outside the white box
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.remove();
             }
         });
+    };
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+    // ==================== PAGE NAVIGATION ====================
+    // Core function to switch between pages
+    function switchToPage(pageName) {
+        // Hide all pages
+        const allPages = document.querySelectorAll('.page');
+        allPages.forEach(page => {
+            page.classList.remove('active-page');
         });
-
-        // Toggle Books Visibility
-        function toggleBooks() {
-            const hiddenBooks = document.getElementById('hiddenBooks');
-            const btnText = document.getElementById('booksBtnText');
-            const btnIcon = document.getElementById('booksBtnIcon');
-            
-            if (hiddenBooks.classList.contains('show')) {
-                hiddenBooks.classList.remove('show');
-                btnText.textContent = 'View Complete Library';
-                btnIcon.textContent = '↓';
-                document.getElementById('books').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                hiddenBooks.classList.add('show');
-                btnText.textContent = 'Show Less';
-                btnIcon.textContent = '↑';
-            }
+        
+        // Show the selected page
+        const selectedPage = document.getElementById(`${pageName}-page`);
+        if (selectedPage) {
+            selectedPage.classList.add('active-page');
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Update URL hash without triggering navigation
+            history.pushState({ page: pageName }, '', `#${pageName}`);
+        } else {
+            console.error(`Page "${pageName}-page" not found`);
+            // Fallback: show home page if target not found
+            const homePage = document.getElementById('home-page');
+            if (homePage) homePage.classList.add('active-page');
         }
+    }
 
-        // Toggle Bio Expansion
-        function toggleBio() {
-            const expandableBio = document.getElementById('expandableBio');
-            const bioToggle = document.getElementById('bioToggle');
-            const isExpanded = expandableBio.classList.contains('expanded');
-            
-            if (isExpanded) {
-                expandableBio.classList.remove('expanded');
-                bioToggle.setAttribute('aria-expanded', 'false');
-                bioToggle.querySelector('span:first-child').textContent = 'Read Full Biography';
-                expandableBio.style.maxHeight = '0px';
-            } else {
-                expandableBio.classList.add('expanded');
-                bioToggle.setAttribute('aria-expanded', 'true');
-                bioToggle.querySelector('span:first-child').textContent = 'Show Less';
-                expandableBio.style.maxHeight = expandableBio.scrollHeight + 'px';
-            }
-        }
+    // Universal showPage function for footer links and other onclick calls
+    window.showPage = function(pageName) {
+        switchToPage(pageName);
+    };
 
-        // Blog Post Click Handler
-        function openBlogPost(id) {
-            const card = event.currentTarget;
-            card.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                card.style.transform = '';
-            }, 150);
-            // In production, this would navigate to the full blog post
-            console.log('Opening blog post ' + id);
-        }
-
-        // Form Handling with Visual Feedback
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formStatus = document.getElementById('formStatus');
-
-        contactForm.addEventListener('submit', function(e) {
-            // Show loading state
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            formStatus.className = 'form-status';
-            
-            // Formspree will handle the actual submission
-            // This visual feedback will show until page redirects or returns
-            setTimeout(() => {
-                // If form hasn't redirected (error case), show error
-                if (!document.hidden) {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Send Message';
-                    formStatus.textContent = 'Sending... Please wait.';
-                    formStatus.className = 'form-status success';
-                    formStatus.style.display = 'block';
-                }
-            }, 2000);
-        });
-
-        // Check for returning from Formspree success page
-        if (window.location.search.includes('submitted=true')) {
-            formStatus.textContent = 'Thank you! Your message has been sent successfully.';
-            formStatus.className = 'form-status success';
-            // Clear the URL parameter
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
-
-        // Mobile menu toggle
-        function toggleMenu() {
-            const nav = document.querySelector('.nav-links');
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-            
-            if (nav.style.display === 'flex') {
-                nav.style.position = 'absolute';
-                nav.style.top = '100%';
-                nav.style.left = '0';
-                nav.style.right = '0';
-                nav.style.background = 'var(--white)';
-                nav.style.flexDirection = 'column';
-                nav.style.padding = '2rem';
-                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-            }
-        }
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+    // Handle navigation from data-page attributes (menu links and internal buttons)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Attach click handlers to all elements with data-page attribute
+        const navElements = document.querySelectorAll('[data-page]');
+        navElements.forEach(element => {
+            element.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const pageName = this.getAttribute('data-page');
+                if (pageName) {
+                    switchToPage(pageName);
+                }
+            });
+        });
+        
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.page) {
+                switchToPage(event.state.page);
+            } else {
+                // If no state, try to get page from URL hash
+                const hash = window.location.hash.substring(1);
+                if (hash && document.getElementById(`${hash}-page`)) {
+                    switchToPage(hash);
+                } else {
+                    switchToPage('home');
+                }
+            }
+        });
+        
+        // Initial check for URL hash on page load
+        const initialHash = window.location.hash.substring(1);
+        if (initialHash && document.getElementById(`${initialHash}-page`)) {
+            switchToPage(initialHash);
+        }
+    });
+
+    // ==================== PRIVACY POLICY MODAL ====================
+    window.showPrivacyPolicy = function() {
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+        modal.style.zIndex = '3000';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.overflowY = 'auto';
+        modal.style.padding = '2rem';
+        
+        modal.innerHTML = `
+            <div style="background: white; border-radius: 20px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem; position: relative; font-family: 'Montserrat', sans-serif;">
+                <button onclick="this.closest('div').parentElement.remove()" style="position: sticky; top: 0; float: right; background: #d4a373; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; color: white; margin-bottom: 1rem;">&times;</button>
+                <div style="clear: both;"></div>
+                <h1 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin-bottom: 0.5rem;">Privacy Policy</h1>
+                <p style="color: #999; margin-bottom: 2rem; font-size: 0.9rem;">Last updated January 2023</p>
+                
+                <p style="margin-bottom: 1rem; line-height: 1.6;">At Hadiza Bagudu Enterprises, we are committed to protecting the privacy of our users. This Privacy Policy outlines the information we collect about you, how we use it, and how you can control the use and disclosure of your data. By accessing our website, you agree to the terms of this Privacy Policy.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Information we collect</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">We may collect the following types of information from you:</p>
+                <ul style="margin-bottom: 1rem; padding-left: 2rem; line-height: 1.6;">
+                    <li><strong>Contact information</strong> - Your name, e-mail address, and phone number.</li>
+                    <li><strong>Demographic information</strong> - such as your age, gender, and language.</li>
+                    <li><strong>Payment information</strong> - such as your credit card number and billing address.</li>
+                    <li><strong>Technical information</strong> - such as your IP address, browser type, and operating system.</li>
+                </ul>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">How we use your information</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">We may use your information for the following purposes:</p>
+                <ul style="margin-bottom: 1rem; padding-left: 2rem; line-height: 1.6;">
+                    <li>To provide our products and services to you.</li>
+                    <li>To process payments and prevent fraud.</li>
+                    <li>To communicate with you about your account and our products and services.</li>
+                    <li>To analyze and improve our products and services.</li>
+                    <li>To display personalized content and advertising.</li>
+                </ul>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Third-Party Disclosure</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">We do not sell, trade, or otherwise transfer to outside parties personally identifiable information unless we provide you with advanced notice. This does not include website hosting partners and other parties who assist us in operating their website, conducting their business, or servicing you so long as those parties agree to keep this information confidential. We may also release your information when we believe release is appropriate to comply with the law, enforce our site policies, or protect our or others' rights, property, or safety.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Third-party links</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">We may occasionally include links to third-party websites. These third-party sites have separate and independent privacy policies. We have no responsibility or liability for the content and activities of these linked sites. Nonetheless we seek to protect the integrity of our site and welcome any feedback about these sites.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Security</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">We have implemented reasonable measures to protect your personal information. However, please be aware that no method of transmission over the Internet or method of electronic storage is 100% secure. Therefore, we cannot guarantee its absolute security. If you have any questions about our security measures, please get in touch with us at hadiza@hadizabagudu.com.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Your right to access and control your personal information</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">You have the right to access and control your personal information. You may do so by contacting us at: hadiza@hadizabagudu.com. In your request, please include your name, and e-mail address, and a description of the information you would like to access.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Changes to this privacy policy</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page. You are advised to review this privacy policy periodically for any changes.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Contact us</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">If you have any questions or suggestions about this privacy policy, please contact us at: hadiza@hadizabagudu.com</p>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+    };
+
+    // ==================== TERMS & CONDITIONS MODAL ====================
+    window.showTermsConditions = function() {
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+        modal.style.zIndex = '3000';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.overflowY = 'auto';
+        modal.style.padding = '2rem';
+        
+        modal.innerHTML = `
+            <div style="background: white; border-radius: 20px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem; position: relative; font-family: 'Montserrat', sans-serif;">
+                <button onclick="this.closest('div').parentElement.remove()" style="position: sticky; top: 0; float: right; background: #d4a373; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; color: white; margin-bottom: 1rem;">&times;</button>
+                <div style="clear: both;"></div>
+                <h1 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin-bottom: 0.5rem;">Terms & Conditions</h1>
+                <p style="color: #999; margin-bottom: 2rem; font-size: 0.9rem;">Welcome to Hadiza Bagudu Enterprises!</p>
+                
+                <p style="margin-bottom: 1rem; line-height: 1.6;">These Terms and Conditions govern your access to and use of our Services, including our website, blog, and audio podcasts (collectively referred to as "Services"). You agree to be bound by these Terms and Conditions by accessing or using any of our services.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Accounts</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">To access and use certain service features, you must create an account. You may not use another user's account without permission. When creating your account, you must provide accurate and complete information. You are solely responsible for the activity of your account and must keep your account password secure.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Content</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">The Services may contain content that is provided by Hadiza Bagudu Enterprises and its licensors, which may include text, graphics, images, audio, video, and other material (collectively "Content"). The Content is protected by copyright, trademark, and other laws. You may not use the Content for any purpose other than as expressly permitted by these Terms and Conditions.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Google AdSense</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">Hadiza Bagudu Enterprises may use Google's AdSense program.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Modifications</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">We may modify these Terms and Conditions from time to time. If we make material changes to these Terms and Conditions, we will notify you through the Services or by email. Your continued use of the Services after the effective date of any such modification constitutes your acceptance.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Termination</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">We may terminate or suspend your access to the Services at any time, for any reason, and without warning, which may result in the forfeiture and destruction of all information associated with your account. If you wish to terminate your account, you may do so by following the instructions on the Services. All provisions of these Terms and Services, which may by their nature survive termination, shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, and limitations of liability.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Disclaimers</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">The Services are provided "as is" and "as available" without warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement. Hadiza Bagudu Enterprises does not represent or warrant that the Services will be interrupted or error-free.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Limitation of Liability</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">In no event will Hadiza Bagudu Enterprises, its affiliates, or their licensors, Service providers, employees, agents, officers, or directors be liable for damages under any legal theory arising out of or in connection with your use or inability to use, the Services, any websites linked to it, any content on the Services or any Services or items obtained through the Services, including any direct, indirect, special incidental, consequential, or punitive damages, including but not limited to personal injury, pain, suffering, emotional distress, loss of revenue, loss of profits, loss of business or anticipated savings, loss of use, loss of goodwill, loss of data and whether caused by tort (including negligence), breach of contract or otherwise, even if foreseeable.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Governing law</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">These Terms and Conditions shall be governed and construed per the laws of the United States without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms and Conditions will not be considered a waiver of these rights. If any provision of these Terms and Conditions is held invalid or enforceable by a court, the remaining provisions will remain in effect. These Terms and Conditions constitute the entire agreement between us regarding our Services and supersede and replace any prior agreements we might have between us regarding Services.</p>
+                
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin: 1.5rem 0 0.5rem;">Contact Us</h2>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">If you have any questions about these Terms and Conditions, please contact us.</p>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+    };
+
+    // ==================== CONTACT FORM MODAL (OLD - KEPT FOR REFERENCE) ====================
+    window.openContactForm = function() {
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        modal.style.zIndex = '2000';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        
+        modal.innerHTML = `
+            <div style="background: white; border-radius: 20px; max-width: 500px; width: 90%; padding: 2rem; position: relative; font-family: 'Montserrat', sans-serif;">
+                <button onclick="this.closest('div').parentElement.remove()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999;">&times;</button>
+                <h2 style="font-family: 'Cormorant Garamond', serif; color: #2c3e50; margin-bottom: 1.5rem;">Contact Hadiza</h2>
+                <form id="contactForm" onsubmit="sendContactMessage(event)">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #2c3e50; font-weight: 500;">Name</label>
+                        <input type="text" id="contactName" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #2c3e50; font-weight: 500;">Email</label>
+                        <input type="email" id="contactEmail" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #2c3e50; font-weight: 500;">Message</label>
+                        <textarea id="contactMessage" rows="4" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;"></textarea>
+                    </div>
+                    <button type="submit" style="width: 100%; padding: 1rem; background: #d4a373; color: white; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 1rem;">Send Message</button>
+                </form>
+                <p style="font-size: 0.8rem; color: #999; text-align: center; margin-top: 1rem;">Your message will be sent directly to the publisher.</p>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+    };
+
+    window.sendContactMessage = function(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('contactName').value;
+        const email = document.getElementById('contactEmail').value;
+        const message = document.getElementById('contactMessage').value;
+        
+        console.log('New Contact Message:');
+        console.log('Name:', name);
+        console.log('Email:', email);
+        console.log('Message:', message);
+        
+        alert(`Thank you ${name}! Your message has been sent. I'll get back to you within 48 hours.`);
+        
+        const modal = document.querySelector('div[style*="position: fixed"][style*="z-index: 2000"]');
+        if (modal) modal.remove();
+    };
+
+    // ==================== MOBILE MENU TOGGLE ====================
+    window.toggleMobileMenu = function() {
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks.style.display === 'flex') {
+            navLinks.style.display = 'none';
+        } else {
+            navLinks.style.display = 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'white';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.padding = '1rem';
+            navLinks.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+        }
+    };
+
+    // ==================== SCROLL ANIMATION ====================
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+
+    // ==================== NAVBAR SCROLL EFFECT ====================
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100) {
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+            lastScroll = currentScroll;
+        });
+    }
+
+    // ==================== SMOOTH SCROLL FOR ANCHOR LINKS ====================
+    document.querySelectorAll('a[href^="#"]:not([data-page])').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href && href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
                 }
+            }
+        });
+    });
+
+    // ==================== MEDIA KIT DOWNLOAD ====================
+    window.downloadMediaKit = function() {
+        alert('Media Kit Download Started!\n\nIn a real implementation, this would download a PDF containing:\n- Short, medium, and long bio versions\n- High-resolution photos\n- Book covers and descriptions\n- Speaking topics and past engagements\n- Contact information\n- Social media links');
+        console.log('Media kit downloaded');
+    };
+
+    // ==================== INITIALIZE ====================
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('Hadiza Bagudu website loaded - everything working!');
+    });
+
+  // Journal/Blog Navigation
+  document.querySelectorAll('.read-more-btn, .next-post, .back-to-blog').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Get target post from data attribute
+      const targetPost = this.getAttribute('data-post');
+      const targetPage = this.getAttribute('data-page');
+      
+      if (targetPost) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+          page.style.display = 'none';
+        });
+        
+        // Show the target post
+        const postElement = document.getElementById(targetPost + '-page');
+        if (postElement) {
+          postElement.style.display = 'block';
+          postElement.classList.add('active-page');
+          
+          // Scroll to top
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } else if (targetPage === 'blog') {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+          page.style.display = 'none';
+        });
+        
+        // Show main blog page
+        const blogPage = document.getElementById('blog-page');
+        if (blogPage) {
+          blogPage.style.display = 'block';
+          blogPage.classList.add('active-page');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+  
+  // Update nav active state when viewing posts
+  function updateNavForPosts() {
+    const blogNavLink = document.querySelector('.nav-links a[data-page="blog"]');
+    if (blogNavLink) {
+      blogNavLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.page').forEach(page => {
+          page.style.display = 'none';
+        });
+        const blogPage = document.getElementById('blog-page');
+        if (blogPage) {
+          blogPage.style.display = 'block';
+          blogPage.classList.add('active-page');
+        }
+        // Update active nav state
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.style.borderBottomColor = 'transparent';
+        });
+        this.style.borderBottomColor = '#C8AA7E';
+      });
+    }
+  }
+  
+  updateNavForPosts();
+  // ==================== PAGE NAVIGATION (CLEAN VERSION) ====================
+(function() {
+    // Core function to switch pages
+    function switchToPage(pageName) {
+        console.log('Switching to:', pageName);
+        
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+            page.style.display = 'none';
+            page.classList.remove('active-page');
+        });
+        
+        // Show selected page
+        const selectedPage = document.getElementById(pageName + '-page');
+        if (selectedPage) {
+            selectedPage.style.display = 'block';
+            selectedPage.classList.add('active-page');
+            
+            // Update nav styling
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.style.borderBottomColor = 'transparent';
+                if (link.getAttribute('data-page') === pageName) {
+                    link.style.borderBottomColor = '#C8AA7E';
+                }
             });
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            history.pushState({ page: pageName }, '', '#' + pageName);
+        }
+    }
+    
+    // Make function global
+    window.switchToPage = switchToPage;
+    window.showPage = switchToPage;
+    
+    // Handle nav link clicks - single event listener (no duplicates)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pageName = this.getAttribute('data-page');
+            if (pageName) switchToPage(pageName);
         });
-
-        // Parallax effect for hero image
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const heroImage = document.querySelector('.hero-image');
-            if (heroImage && window.innerWidth > 768) {
-                heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+    });
+    
+    // Handle blog read more buttons - single event listener
+    document.querySelectorAll('.read-more-btn, .next-post, .back-to-blog').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetPost = this.getAttribute('data-post');
+            const targetPage = this.getAttribute('data-page');
+            
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+                page.classList.remove('active-page');
+            });
+            
+            if (targetPost) {
+                const postPage = document.getElementById(targetPost + '-page');
+                if (postPage) {
+                    postPage.style.display = 'block';
+                    postPage.classList.add('active-page');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } else if (targetPage === 'blog') {
+                const blogPage = document.getElementById('blog-page');
+                if (blogPage) {
+                    blogPage.style.display = 'block';
+                    blogPage.classList.add('active-page');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             }
         });
-
-        // Initialize bio height on load
-        document.addEventListener('DOMContentLoaded', () => {
-            const expandableBio = document.getElementById('expandableBio');
-            if (expandableBio) {
-                expandableBio.style.maxHeight = '0px';
+    });
+    
+    // Handle browser back/forward
+    window.addEventListener('popstate', function(event) {
+        if (event.state && event.state.page) {
+            switchToPage(event.state.page);
+        } else {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash + '-page')) {
+                switchToPage(hash);
+            } else {
+                switchToPage('home');
             }
-        });
-    </script>
+        }
+    });
+    
+    // Initialize - show home page
+    const initialPage = window.location.hash.substring(1) || 'home';
+    switchToPage(initialPage);
+})();
+window.toggleMobileMenu = function() {
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks) {
+        navLinks.classList.toggle('show');
+    }
+};
 
+</script>
 </body>
 </html>
