@@ -225,7 +225,7 @@
     }
    .poetry-bg-side {
   flex: 1.2;
-  background-image: url('https://pixabay.com/get/ged7ffe76f60bd7141b26ebb336b8e5357908f8063b85ba95b4516a50af7f694112ce4fc3babc96afbcfdb51d934d928b2149d4cf2efa15f611f60c963404f0fc_1920.jpg');
+  background-image: url('https://static.wixstatic.com/media/11062b_c127c132f14e41a1a4a9182888bf05ba~mv2.jpg/v1/fill/w_1200,h_1200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_c127c132f14e41a1a4a9182888bf05ba~mv2.jpg');
   background-size: cover;
   background-position: center 30%;
   min-height: 480px;
@@ -494,6 +494,127 @@
         flex-wrap: wrap;
     }
 }
+/* ===== POEM TEMPLATE STYLES ===== */
+.poem-block {
+  max-width: 640px;
+  margin: 0 auto 4rem;
+  padding: 2.5rem 3rem;
+  background: #fff;
+  border: 1px solid #e8e0d6;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+.poem-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.poem-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #1a0f0a;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.poem-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #2c241c;
+  text-align: left;           /* left-aligned for readability */
+  margin-bottom: 2.5rem;
+}
+
+.poem-text p {
+  margin-bottom: 1.2rem;      /* breathing room between lines */
+  text-indent: 0;             /* no indent, clean block style */
+}
+
+.poem-text p:last-child {
+  margin-bottom: 0;
+}
+
+.poem-stanza {
+  margin-top: 1.5rem;         /* extra space before final stanza */
+  font-style: italic;
+}
+
+.poem-footer {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8e0d6;
+}
+
+.poem-copyright,
+.poem-website {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  color: #8b7355;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+.review-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: #faf8f5;
+  border: 1px solid #d4c4b0;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #6b4e3d;
+  font-size: 0.9rem;
+  font-style: italic;
+  font-family: 'Lato', sans-serif;
+  transition: all 0.25s ease;
+  margin-top: 1rem;
+}
+
+.review-link:hover {
+  background: #f0ebe3;
+  border-color: #b8956a;
+  color: #3d2b1f;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.review-link::before {
+  content: "✎";
+  font-style: normal;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .poem-block {
+    padding: 1.8rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .poem-img {
+    height: 200px;
+  }
+  
+  .poem-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .poem-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+}
+
 
   </style>
 </head>
@@ -590,7 +711,7 @@
 <!-- Astral Series Promo Section -->
   <section class="astral-series-promo" style="margin: 2.5rem 0; background: #FFFFFF; border: 1px solid #ECE3D8; overflow: hidden; transition: all 0.2s ease;">
     <div style="display: flex; flex-wrap: wrap; align-items: stretch; margin: 0; padding: 0;">
-      <div class="astral-image-col" style="flex: 1.2; min-width: 200px; background-image: url('https://pixabay.com/get/g1dc051ec0fdba01894bbf1c336778707942d02565b9e7b6554384524f8bc8b55d519baa8ad4ddd967b37ca041d8991d6d7b7adbb970e43c68dc79c115b8c0f52_1920.jpg'); background-size: cover; background-position: center 35%; min-height: 400px; position: relative;">
+      <div class="astral-image-col" style="flex: 1.2; min-width: 200px; background-image: url('https://static.wixstatic.com/media/11062b_d12e28a47b1049fdb50b8d45e71e6271~mv2.jpg/v1/fill/w_1200,h_674,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_d12e28a47b1049fdb50b8d45e71e6271~mv2.jpg'); background-size: cover; background-position: center 35%; min-height: 400px; position: relative;">
         <div class="astral-overlay" style="position: absolute; top: 0; right: 0; width: 35%; height: 100%; background: linear-gradient(90deg, rgba(255,255,245,0) 0%, #FFFFFF 100%); pointer-events: none;"></div>
       </div>
       <div class="astral-text-col" style="flex: 1; background: #FFFFFF; padding: 2rem 2.2rem; display: flex; flex-direction: column; justify-content: center;">
@@ -1272,7 +1393,7 @@
   <div class="recipe-item" style="margin-bottom: 3rem; border-bottom: 1px solid #EBE2D6; padding-bottom: 2rem;">
     <div class="recipe-layout" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
       <div class="recipe-image" style="flex: 1; min-width: 250px;">
-        <img src="https://static.wixstatic.com/media/11062b_4a621de380704f7c8563bcdbe48e8412~mv2.jpg/v1/fill/w_1646,h_855,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_4a621de380704f7c8563bcdbe48e8412~mv2.jpg" 
+        <img src="https://static.wixstatic.com/media/0a0ba1_ed2be4bafd2b44ff97769cb7ac2eb737~mv2.jpeg/v1/fill/w_900,h_1200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0a0ba1_ed2be4bafd2b44ff97769cb7ac2eb737~mv2.jpeg" 
              alt="Nigerian Party Jollof Rice" 
              style="width: 100%; height: 250px; border: 1px solid #E2D4C5; box-shadow: 4px 4px 0 #F5EFE7; object-fit: cover;">
       </div>
@@ -1434,13 +1555,16 @@
     </div>
     
     <!-- Post Card 2 -->
-    <div class="post-card" style="background: white; border: 1px solid #EBE2D6; padding: 1.5rem; transition: all 0.25s ease;">
-      <div class="post-category" style="font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #9E8262; margin-bottom: 0.8rem;">Faith & Spirituality</div>
-      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">The Hajj Journey That Changed Me</h3>
-      <p style="color: #7A6852; font-size: 0.8rem; margin-bottom: 1rem;">March 28, 2025 • 10 min read</p>
-      <p style="margin-bottom: 1.2rem; font-size: 0.95rem;">How the pilgrimage to Mecca transformed my creative vision and became the seed for "An Epic Journey of Faith..."</p>
-      <a href="#" data-post="post2" class="read-more-btn" style="display: inline-block; background: transparent; border: none; padding: 0; font-size: 0.85rem; font-weight: 500; color: #8A6F4C; border-bottom: 1px solid #DCCFBF;">Continue Reading →</a>
-    </div>
+<div class="post-card" style="background: white; border: 1px solid #EBE2D6; padding: 1.5rem; transition: all 0.25s ease;">
+<img src="https://cdn.pixabay.com/photo/2019/08/11/20/07/the-crowd-4399822_1280.jpg" alt="Mount Arafat" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1.2rem; border-radius: 4px;">
+<div class="post-category" style="font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #9E8262; margin-bottom: 0.8rem;">Faith & Spirituality</div>
+<h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">The Hajj Journey That Changed Me</h3>
+<p style="color: #7A6852; font-size: 0.8rem; margin-bottom: 1rem;">March 28, 2025 • 10 min read</p>
+<p style="margin-bottom: 1.2rem; font-size: 0.95rem;">How the pilgrimage to Mecca transformed my creative vision and became the seed for "An Epic Journey of Faith..."</p>
+<a href="#" data-post="post2" class="read-more-btn" style="display: inline-block; background: transparent; border: none; padding: 0; font-size: 0.85rem; font-weight: 500; color: #8A6F4C; border-bottom: 1px solid #DCCFBF;">Continue Reading →</a>
+</div>
+
+
     
     <!-- Post Card 3 -->
     <div class="post-card" style="background: white; border: 1px solid #EBE2D6; padding: 1.5rem; transition: all 0.25s ease;">
@@ -1475,12 +1599,18 @@
   <div style="background: #FDFAF5; border: 1px solid #E5D9CD; padding: 2rem; text-align: center; margin-top: 2rem;">
     <span class="floral-icon">✉️</span>
     <h3 style="margin: 0.5rem 0;">Never miss a post</h3>
-    <p style="color: #5D6D7E; margin-bottom: 1rem;">Join the reading circle — new letters delivered to your inbox.</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center;">
-      <input type="email" placeholder="Your email address" style="padding: 0.7rem 1rem; border: 1px solid #D4C0A8; background: white; min-width: 250px;">
-      <button class="btn" style="background: #FFFFFF;">Subscribe</button>
+    <p style="color: #5D6D7E; margin-bottom: 1rem;">📬 Join the reading circle — new releases, letters, and quiet giveaways.</p>
+    <a href="https://wa.link/05yu28" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+        <button id="joinWhatsAppBtnHome" class="join-wa-btn" style="background: white; cursor: pointer;">➕ Join WhatsApp</button>
+    </a>
     </div>
   </div>
+
+
+
+</div>
+
+
   
 </div>
 
@@ -1659,40 +1789,43 @@
 </div>
 <!-- POST 2 TEMPLATE - The Hajj Journey That Changed Me -->
 <div id="post2-page" class="page" style="display: none;">
-  <div style="max-width: 800px; margin: 0 auto;">
-    <a href="#" data-page="blog" class="back-to-blog" style="display: inline-block; margin-bottom: 2rem; color: #8A6F4C;">← Back to Journal</a>
-    
-    <div style="background: #FCFAF7; padding: 2rem; margin-bottom: 2rem; border: 1px solid #EFE6DD;">
-      <div class="floral-divider" style="text-align: left;">✽ ✿ ✾</div>
-      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">The Hajj Journey That Changed Me</h1>
-      <p style="color: #7A6852; margin-bottom: 1rem;">March 28, 2025 • 10 min read</p>
-      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
-        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Faith & Spirituality</span>
-        <span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Memoir</span>
-      </div>
-    </div>
-    
-    <div style="background: white; border: 1px solid #EBE2D6; padding: 2rem;">
-      <p>In 2019, I stood on the plains of Arafat surrounded by millions of souls from every corner of the earth. We spoke different languages, wore different clothes, carried different stories — but in that moment, we were the same. We were pilgrims seeking closeness to the Divine.</p>
-      
-      <p>That journey became the seed for <em>“An Epic Journey of Faith.”</em> But more than a book, it became a lens through which I now see all my writing.</p>
-      
-      <h3 style="margin: 1.5rem 0 0.8rem;">The Power of Shared Sacred Space</h3>
-      <p>The Hajj taught me that the most powerful stories are those that remind us of our shared humanity. When I write — whether it's a poem about love or a novel about a prince seeking redemption — I'm always trying to create sacred space on the page.</p>
-      
-      <div class="testimonial" style="margin: 2rem 0;">
-        <p>“An Extraordinary Experience is exactly that. A faith-filled journey that touched my heart.” — Amazon Customer</p>
-      </div>
-      
-      <p style="margin-top: 2rem; font-style: italic;">Have you ever had a journey — physical or spiritual — that changed your perspective? I'd love to hear about it.</p>
-    </div>
-    
-    <div style="margin-top: 2rem; padding: 1rem; border-top: 1px solid #EBE2D6; display: flex; justify-content: space-between; flex-wrap: wrap;">
-      <a href="#" data-post="post1" class="next-post" style="color: #8A6F4C;">← Previous: Architecture of Nigerian Fantasy</a>
-      <a href="#" data-post="post3" class="next-post" style="color: #8A6F4C;">Next: Why I Write About Scars →</a>
-    </div>
-  </div>
+<div style="max-width: 800px; margin: 0 auto;">
+<a href="#" data-page="blog" class="back-to-blog" style="display: inline-block; margin-bottom: 2rem; color: #8A6F4C;">← Back to Journal</a>
+
+<div style="background: #FCFAF7; padding: 2rem; margin-bottom: 2rem; border: 1px solid #EFE6DD;">
+<div class="floral-divider" style="text-align: left;">✽ ✿ ✾</div>
+<h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">The Hajj Journey That Changed Me</h1>
+<p style="color: #7A6852; margin-bottom: 1rem;">March 28, 2025 • 10 min read</p>
+<div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+<span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Faith & Spirituality</span>
+<span style="background: #FCF8F2; padding: 0.2rem 0.8rem; font-size: 0.7rem;">Memoir</span>
 </div>
+</div>
+
+<div style="background: white; border: 1px solid #EBE2D6; padding: 2rem;">
+<img src="https://cdn.pixabay.com/photo/2019/08/11/20/07/the-crowd-4399822_1280.jpg" alt="Mount Arafat" style="width: 100%; max-height: 400px; object-fit: cover; margin-bottom: 2rem; border-radius: 4px;">
+
+<p>In 2019, I stood on the plains of Arafat surrounded by millions of souls from every corner of the earth. We spoke different languages, wore different clothes, carried different stories — but in that moment, we were the same. We were pilgrims seeking closeness to the Divine.</p>
+
+<p>That journey became the seed for <em>“An Epic Journey of Faith.”</em> But more than a book, it became a lens through which I now see all my writing.</p>
+
+<h3 style="margin: 1.5rem 0 0.8rem;">The Power of Shared Sacred Space</h3>
+<p>The Hajj taught me that the most powerful stories are those that remind us of our shared humanity. When I write — whether it's a poem about love or a novel about a prince seeking redemption — I'm always trying to create sacred space on the page.</p>
+
+<div class="testimonial" style="margin: 2rem 0;">
+<p>“An Extraordinary Experience is exactly that. A faith-filled journey that touched my heart.” — Amazon Customer</p>
+</div>
+
+<p style="margin-top: 2rem; font-style: italic;">Have you ever had a journey — physical or spiritual — that changed your perspective? I'd love to hear about it.</p>
+</div>
+
+<div style="margin-top: 2rem; padding: 1rem; border-top: 1px solid #EBE2D6; display: flex; justify-content: space-between; flex-wrap: wrap;">
+<a href="#" data-post="post1" class="next-post" style="color: #8A6F4C;">← Previous: Architecture of Nigerian Fantasy</a>
+<a href="#" data-post="post3" class="next-post" style="color: #8A6F4C;">Next: Why I Write About Scars →</a>
+</div>
+</div>
+</div>
+
 
 <!-- POST 3 TEMPLATE - Why I Write About Scars -->
 <div id="post3-page" class="page" style="display: none;">
@@ -1804,6 +1937,8 @@
     </div>
   </div>
 </div>
+
+
 <!-- POETRY PAGE -->
 <div id="poetry-page" class="page">
   <div class="poetry-hero">
@@ -1824,11 +1959,37 @@
       </div>
     </div>
   </div>
+
+  <!-- ===== FEATURED POEM: Homebody ===== -->
+  <div class="featured-poem">
+    <article class="poem-block">
+<h1 class="article-title">FEATURED POEM</h1>
+
+      <img src="https://cdn.pixabay.com/photo/2016/03/24/13/45/coffee-1276778_1280.jpg" 
+           class="poem-img" 
+           alt="Coffee">
+      <h2 class="poem-title">Homebody</h2>
+
+      <div class="poem-text">
+        <p>There is a certain kind of peace that comes with being at home —</p>
+        <p>Spending time alone, far from the noise of the crowd, the judgments, the fake nice-ssities, and chaos.</p>
+        <p>To be with your thoughts and emotions, and let creativity flow.</p>
+        <p>Fewer distractions, more introspection.</p>
+        <p>To be immune from social demands and external stimulation; leads to creativity, imagination, and innovation,</p>
+        <p>Most people require social interaction and external validation, a thirst for endless connection</p>
+        <p>But for me, peace looks like staying home alone.</p>
+        <p>Different strokes for different folks.</p>
+        <p class="poem-stanza">Far be it from me to judge.<br>But if I have to choose —<br>I'd choose home.</p>
+      </div>
+
+      <div class="poem-footer">
+        <p class="poem-copyright">©️ 2025 Hadiza Bagudu</p>
+        <p class="poem-website">www.hadizab.com</p>
+        <a href="https://hadizab.github.io/Leave-a-Review/" class="review-link">Leave a Review</a>
+      </div>
+    </article>
+  </div>
 </div>
-
-  
-
-
 
 
 <!-- Footer -->
